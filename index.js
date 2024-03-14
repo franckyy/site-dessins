@@ -1,3 +1,5 @@
+alert("coucou");
+
 // palette graphique du site
 const colorBackLogo = "rgb(133, 236, 228)";
 const color_2 = "rgb(85, 224, 214)";
@@ -17,5 +19,5 @@ const color_3_3 = "rgb(70, 235, 53)";
 const color_3_4 = "rgb(34, 229, 14)";
 const color_3_5 = "rgb(20, 210, 0)";
 
-document.getElementById("Logo").style.background = colorBackLogo;
-document.querySelector("nav").style.background = colorNavClicked;
+//document.getElementById("Logo").style.background = colorBackLogo;
+document.querySelector("header").style.background = colorBackLogo;
