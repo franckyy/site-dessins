@@ -18,4 +18,4 @@ const color_3_4 = "rgb(34, 229, 14)";
 const color_3_5 = "rgb(20, 210, 0)";
 
 //document.getElementById("Logo").style.background = colorBackLogo;
-document.querySelector("header").style.background = colorBackLogo;
+// document.querySelector("header").style.background = colorBackLogo;

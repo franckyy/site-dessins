@@ -11,7 +11,13 @@
 <body>
 
     <header>
-        <img src="assets/logo_400-100.png" alt="logo">
+        <img 
+            srcset="assets/logo_400-100.png 400w, assets/logo_300-75.png 300w"
+            sizes="(max-width:870px) 300px,400px"
+            src="assets/logo_400-100.png"
+            alt="logo" >
+            
+
         <ul class="header__menu">
             <li><a href="#">Acceuil</a></li>
             <li><a href="#">Thèmes</a></li>
