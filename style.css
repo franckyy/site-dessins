@@ -77,15 +77,3 @@ header {
     color: #fff;
 }
 
-/* responsive */
-
-@media screen and (max-width: 940px) {
-    a {
-        font-size: 10px;
-    }
-}
-@media screen and (max-width: 870px) {
-    .header__menu img {
-        src: url(assets/logo_300-75.png);
-    }
-}

@@ -1,0 +1,63 @@
+/* responsive */
+
+@media screen and (max-width: 1260px) {
+    header img {
+        max-width: 350px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1090px) {
+    header img {
+        max-width: 300px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 970px) {
+    header img {
+        max-width: 250px;
+        height: auto;
+    }
+    a {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 790px) {
+    .header__buttons a {
+        margin-left: 0;
+    }
+    header img {
+        max-width: 200px;
+        height: auto;
+    }
+    
+}
+
+@media screen and (max-width: 720px) {
+    header img {
+        max-width: 150px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    header img {
+        max-width: 100px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    a {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    header img {
+        max-width: 50px;
+        height: auto;
+    }
+}
