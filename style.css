@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-/* /* declaration des variables en fonction de la couleur */
+/* declaration des variables en fonction de la couleur */
 :root {
-    --colorBackLogo: rgb(133, 236, 228);
+    --colorBackLogo: rgb(149, 246, 139);
+    --colorNavClicked: rgb(66, 117, 219);
+    --colorScrollBarThumb: rgb(101, 144, 228);
+    --colorBody: rgb(145, 176, 238);
 }
 
+/* STYLE */
 * {
     margin: 0;
     padding: 0;
@@ -11,20 +15,23 @@
     font-family: "Roboto", sans-serif;
 }
 
+
 ::-webkit-scrollbar {
     width: 8px;
 }
 ::-webkit-scrollbar-thumb {
     width: 5px;
-    background-color: rgb(101, 144, 228);
+    background-color: var(--colorScrollBarThumb);
     border-radius: 6px;
 }
+
 body {
-    background-color: rgb(12, 66, 172);
+    background-color: var(--colorBody);
 }
 a {
     text-decoration: 0;
     color: rgb(0, 160, 148);
+    /*text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;*/
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 2px;
