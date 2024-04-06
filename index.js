@@ -9,7 +9,7 @@ const colorBody= "rgb(145, 176, 238)";
 const colorScrollBarThumb = "rgb(101, 144, 228)";
 const colorNavClicked = "rgb(66, 117, 219)";
 const color_2_4 = "rgb(32, 91, 208)";
-const colorBody = "rgb(12, 66, 172)";
+const color_2_5 = "rgb(12, 66, 172)";
 
 const colorBackLogo = "rgb(149, 246, 139)";
 const color_3_2 = "rgb(106, 240, 92)";
