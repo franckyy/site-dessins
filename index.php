@@ -1,4 +1,7 @@
-<?php require 'head.php';?>
+<?php 
+$title = "Dessins";
+$ulActive = "index";
+require 'head.php';?>
 
 
 <body>
