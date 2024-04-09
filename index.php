@@ -1,8 +1,6 @@
 <?php 
 $title = "Dessins";
-$ulActive = "index";
 require 'head.php';?>
-
 
 <body>
 

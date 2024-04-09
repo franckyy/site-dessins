@@ -1,6 +1,5 @@
 <?php 
 $title = "Jeux";
-$ulActive = "jeux";
 require 'head.php';
 ?>
 <body>

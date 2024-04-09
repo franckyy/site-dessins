@@ -6,7 +6,7 @@
             <li 
                 class="
                     <?php 
-                        if($ulActive === 'index') {
+                        if($_SERVER['SCRIPT_NAME'] === '/index.php') {
                             echo "ulActive";
                         }
                     ?>
@@ -17,7 +17,7 @@
             <li
                 class="
                     <?php
-                        if($ulActive === 'labyrinthes') {
+                        if($_SERVER['SCRIPT_NAME'] === '/labyrinthes.php') {
                             echo "ulActive";
                         }
                     ?>
@@ -28,7 +28,7 @@
             <li
                 class="
                    <?php 
-                        if($ulActive === 'jeux') {
+                        if($_SERVER['SCRIPT_NAME'] === '/jeux.php') {
                             echo "ulActive";
                         }
                    ?> 
