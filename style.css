@@ -5,6 +5,7 @@
     --colorNavClicked: rgb(66, 117, 219);
     --colorScrollBarThumb: rgb(101, 144, 228);
     --colorBody: rgb(145, 176, 238);
+    --colorBorder : rgb(34, 229, 14);
 }
 
 /* STYLE */
@@ -86,4 +87,30 @@ header {
     background-color: #000;
     color: #fff;
 }
+.grid-wrapper{
+    margin: 10px;
+    margin-right: 25px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 250px;
+    grid-auto-flow: dense;
+}
+.grid-wrapper > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: thick double var(--colorBorder);
+    border-radius: 10px;
+}
+.grid-wrapper > div > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    max-width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
 
