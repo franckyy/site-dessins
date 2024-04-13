@@ -10,22 +10,19 @@ require 'head.php';?>
 
 <?php 
     $dir = 'dessins/jpg/';
-    $files = scandir($dir);
+    $json = file_get_contents('datas/images.json');
+    $json_data = json_decode($json,true);
 ?>
 
 <div class="grid-wrapper">
     <?php 
-        foreach($files as $file) {
-            if($file == "." || $file == "..") {
-
-            } else {
-                if(stripos($file, "_coul") != false) {
+        foreach($json_data as $draw) {
+            if($draw["couleur"] == true) {
     ?>
-                    <div>
-                        <img id="dessin" src="<?php echo($dir . $file)?>" alt="dessin : ' . $file . '">
-                    </div>
+                <div>
+                    <img id="dessin" src="<?php echo($dir . $draw["name"] . '.jpg')?>" alt="dessin : ' . $draw["name"] . '">
+                </div>
     <?php               
-                }
             }
         }
     ?>

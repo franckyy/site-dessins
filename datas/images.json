@@ -1,17 +1,23 @@
-{
-    "images":[
-        {"nom":"abstrait","theme":"abstrait","couleur":"false"},
-        {"nom":"abstrait_coul","theme":"abstrait","couleur":"true"},
-        {"nom":"Chat","theme":"animaux","couleur":"false"},
-        {"nom":"Chat_blanc_coul","theme":"animaux","couleur":"true"},
-        {"nom":"Chat_gris_coul","theme":"animaux","couleur":"true"},
-        {"nom":"Cheval_galop","theme":"animaux","couleur":"false"},
-        {"nom":"Cheval_galop_coul","theme":"animaux","couleur":"true"},
-        {"nom":"cheval_mandala","theme":"animaux","couleur":"false"},
-        {"nom":"cheval_mandala_coul","theme":"animaux","couleur":"true"},
-        {"nom":"cheval_rassemble","theme":"animaux","couleur":"false"},
-        {"nom":"cheval_rassemble_coul","theme":"animaux","couleur":"true"},
-        {"nom":"Fleurs","theme":"nature","couleur":"false"},
-        {"nom":"Fleurs_coul","theme":"nature","couleur":"true"}
-    ]
-}
+[
+    {"nom":"abstrait","theme":"abstrait","couleur":"false"},
+    {"nom":"abstrait_coul","theme":"abstrait","couleur":"true"},
+    {"nom":"Chat","theme":"animaux","couleur":"false"},
+    {"nom":"Chat_blanc_coul","theme":"animaux","couleur":"true"},
+    {"nom":"Chat_gris_coul","theme":"animaux","couleur":"true"},
+    {"nom":"Cheval_galop","theme":"animaux","couleur":"false"},
+    {"nom":"Cheval_galop_coul","theme":"animaux","couleur":"true"},
+    {"nom":"cheval_mandala","theme":"animaux","couleur":"false"},
+    {"nom":"cheval_mandala_coul","theme":"animaux","couleur":"true"},
+    {"nom":"cheval_rassemble","theme":"animaux","couleur":"false"},
+    {"nom":"cheval_rassemble_coul","theme":"animaux","couleur":"true"},
+    {"nom":"Fleurs","theme":"nature","couleur":"false"},
+    {"nom":"Fleurs_coul","theme":"nature","couleur":"true"}, 
+    {"nom":"hirondelle","theme":"animmaux","couleur":"false"}, 
+    {"nom":"hirondelle_coul","theme":"animmaux","couleur":"true"}, 
+    {"nom":"Ours_geometrique","theme":"animmaux","couleur":"false"}, 
+    {"nom":"Ours_geometrique_coul","theme":"animmaux","couleur":"true"}, 
+    {"nom":"pur-sang_arabe_fleurs","theme":"animmaux","couleur":"false"}, 
+    {"nom":"pur-sang_arabe_fleurs_coul","theme":"animmaux","couleur":"true"}, 
+    {"nom":"souris","theme":"animmaux","couleur":"false"}, 
+    {"nom":"souris_coul","theme":"animmaux","couleur":"true"}
+]
