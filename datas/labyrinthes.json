@@ -1,0 +1,14 @@
+[
+    {"nom":"laby_01_solution","solution":"true"}, 
+    {"nom":"laby_01","solution":"false"}, 
+    {"nom":"laby_02_solution","solution":"true"}, 
+    {"nom":"laby_02","solution":"false"}, 
+    {"nom":"laby_03_solution","solution":"true"}, 
+    {"nom":"laby_03","solution":"false"}, 
+    {"nom":"laby_04_solution","solution":"true"}, 
+    {"nom":"laby_04","solution":"false"}, 
+    {"nom":"laby_05_solution","solution":"true"}, 
+    {"nom":"laby_05","solution":"false"}, 
+    {"nom":"laby_06_solution","solution":"true"}, 
+    {"nom":"laby_06","solution":"false"}
+]

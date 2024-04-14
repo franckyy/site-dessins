@@ -17,10 +17,10 @@ require 'head.php';?>
 <div class="grid-wrapper">
     <?php 
         foreach($json_data as $draw) {
-            if($draw["couleur"] == true) {
+            if($draw['couleur'] == 'true') {
     ?>
                 <div>
-                    <img id="dessin" src="<?php echo($dir . $draw["name"] . '.jpg')?>" alt="dessin : ' . $draw["name"] . '">
+                    <img id="dessin" src="<?php echo($dir . $draw["nom"] . '.jpg')?>" alt="dessin : <?= $draw['nom'] ?> ">
                 </div>
     <?php               
             }
