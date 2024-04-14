@@ -1,14 +1,10 @@
 [
-    {"nom":"laby_01_solution","solution":"true"}, 
-    {"nom":"laby_01","solution":"false"}, 
-    {"nom":"laby_02_solution","solution":"true"}, 
-    {"nom":"laby_02","solution":"false"}, 
-    {"nom":"laby_03_solution","solution":"true"}, 
-    {"nom":"laby_03","solution":"false"}, 
-    {"nom":"laby_04_solution","solution":"true"}, 
-    {"nom":"laby_04","solution":"false"}, 
-    {"nom":"laby_05_solution","solution":"true"}, 
-    {"nom":"laby_05","solution":"false"}, 
-    {"nom":"laby_06_solution","solution":"true"}, 
-    {"nom":"laby_06","solution":"false"}
+    {"nom":"laby_01_solution","solution":"true", "dossier":"01/"}, 
+    {"nom":"laby_01","solution":"false", "dossier":"01/"}, 
+    {"nom":"laby_02_solution","solution":"true", "dossier":"02/"}, 
+    {"nom":"laby_02","solution":"false", "dossier":"02/"}, 
+    {"nom":"laby_03_solution_souris","solution":"true", "dossier":"03/"}, 
+    {"nom":"laby_03_souris","solution":"false", "dossier":"03/"}, 
+    {"nom":"laby_04_solution","solution":"true", "dossier":"04/"}, 
+    {"nom":"laby_04","solution":"false", "dossier":"04/"}
 ]
