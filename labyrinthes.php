@@ -19,6 +19,7 @@ require 'head.php';
     ?>
                 <div>
                    <img id="dessin" src="<?php echo($dir . $draw['dossier'] . $draw['nom'] . '.jpg')?>" alt="labyrinthe : <?= $draw['nom'] ?> ">
+                    <button class="btnDownloadLaby">Download</button>
                 </div>
     <?php               
             }
