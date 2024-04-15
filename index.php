@@ -21,6 +21,7 @@ require 'head.php';?>
     ?>
                 <div>
                     <img id="dessin" src="<?php echo($dir . $draw["nom"] . '.jpg')?>" alt="dessin : <?= $draw['nom'] ?> ">
+                    <button class="btnDownload">Download</button>
                 </div>
     <?php               
             }

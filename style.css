@@ -111,4 +111,22 @@ header {
     max-width: 100%;
     vertical-align: middle;
     display: inline-block;
+    width: 100%;
 }
+.btnDownload {
+    position: absolute;
+    transform: translate(60%, 200%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    opacity: 0.8;
+  }
+  .btnDownload:hover {
+    background-color: black;
+    transition: 0.5s;
+  }
