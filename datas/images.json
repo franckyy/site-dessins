@@ -12,12 +12,12 @@
     {"nom":"cheval_rassemble_coul","theme":"animaux","couleur":"true"},
     {"nom":"Fleurs","theme":"nature","couleur":"false"},
     {"nom":"Fleurs_coul","theme":"nature","couleur":"true"}, 
-    {"nom":"hirondelle","theme":"animmaux","couleur":"false"}, 
-    {"nom":"hirondelle_coul","theme":"animmaux","couleur":"true"}, 
-    {"nom":"Ours_geometrique","theme":"animmaux","couleur":"false"}, 
-    {"nom":"Ours_geometrique_coul","theme":"animmaux","couleur":"true"}, 
-    {"nom":"pur-sang_arabe_fleurs","theme":"animmaux","couleur":"false"}, 
-    {"nom":"pur-sang_arabe_fleurs_coul","theme":"animmaux","couleur":"true"}, 
-    {"nom":"souris","theme":"animmaux","couleur":"false"}, 
-    {"nom":"souris_coul","theme":"animmaux","couleur":"true"}
+    {"nom":"hirondelle","theme":"animaux","couleur":"false"}, 
+    {"nom":"hirondelle_coul","theme":"animaux","couleur":"true"}, 
+    {"nom":"Ours_geometrique","theme":"animaux","couleur":"false"}, 
+    {"nom":"Ours_geometrique_coul","theme":"animaux","couleur":"true"}, 
+    {"nom":"pur-sang_arabe_fleurs","theme":"animaux","couleur":"false"}, 
+    {"nom":"pur-sang_arabe_fleurs_coul","theme":"animaux","couleur":"true"}, 
+    {"nom":"souris","theme":"animaux","couleur":"false"}, 
+    {"nom":"souris_coul","theme":"animaux","couleur":"true"}
 ]

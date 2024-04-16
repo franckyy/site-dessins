@@ -11,7 +11,7 @@
                         }
                     ?>
                 ">
-                <a href="/index.php">Dessins</a>
+                <a href="/index.php">Coloriages</a>
             </li>
 
             <li

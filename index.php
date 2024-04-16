@@ -1,19 +1,40 @@
 <?php 
 $title = "Dessins";
-require 'head.php';?>
+require 'head.php';
+$dir = 'dessins/jpg/';
+$json = file_get_contents('datas/images.json');
+$json_data = json_decode($json,true);
+$themes = ["Tout"];
+?>
+
 
 <body>
 
 <?php require 'header.php';?>
-    
-<h2>Dessins</h2>
 
-<?php 
-    $dir = 'dessins/jpg/';
-    $json = file_get_contents('datas/images.json');
-    $json_data = json_decode($json,true);
-?>
+<div class="selectColo">
+    <?php
+    foreach($json_data as $draw){
+        if(in_array($draw['theme'], $themes)) {
+           
+        } else {
+            $themes[] = $draw['theme']; 
+        }
+    }
 
+    ?>
+
+        <select name="themesColo">
+            <?php
+                foreach($themes as $theme){
+            ?>
+                    <option><?= $theme ?></option>
+            <?php
+                }
+            ?>
+        </select>
+
+</div>
 <div class="grid-wrapper">
     <?php 
         foreach($json_data as $draw) {

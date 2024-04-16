@@ -4,7 +4,6 @@ require 'head.php';
 ?>
 <body>
 <?php require 'header.php';?>
-<h3>Labyrinthes</h3>
 
 <?php 
     $dir = 'dessins/labyrinthes/';
