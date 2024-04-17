@@ -5,24 +5,25 @@ $dir = 'dessins/jpg/';
 $json = file_get_contents('datas/images.json');
 $json_data = json_decode($json,true);
 $themes = ["Tout"];
+$themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_SANITIZE_STRING);
 ?>
-
 
 <body>
 
 <?php require 'header.php';?>
 
-<div class="selectColo">
-    <?php
-    foreach($json_data as $draw){
-        if(in_array($draw['theme'], $themes)) {
-           
-        } else {
-            $themes[] = $draw['theme']; 
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
+    <div class="selectColo">
+        <?php
+        foreach($json_data as $draw){
+            if(in_array($draw['theme'], $themes)) {
+            
+            } else {
+                $themes[] = $draw['theme'];
+            }
         }
-    }
 
-    ?>
+        ?>
 
         <select name="themesColo">
             <?php
@@ -33,8 +34,19 @@ $themes = ["Tout"];
                 }
             ?>
         </select>
+    </div>
+    
+    <div>
+        <button type="submit">Select</button>
+    </div>
+</form>
 
-</div>
+<pre>
+    <?php
+        print_r($themesColo);
+    ?>
+</pre>
+
 <div class="grid-wrapper">
     <?php 
         foreach($json_data as $draw) {
