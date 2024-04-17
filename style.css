@@ -125,12 +125,12 @@ header {
     cursor: pointer;
     border-radius: 5px;
     opacity: 0.8;
-  }
-  .btnDownload:hover {
+}
+.btnDownload:hover {
     background-color: black;
     transition: 0.5s;
-  }
-  .btnDownloadLaby {
+}
+.btnDownloadLaby {
     position: absolute;
     transform: translate(80%, 200%);
     -ms-transform: translate(-50%, -50%);
@@ -142,8 +142,22 @@ header {
     cursor: pointer;
     border-radius: 5px;
     opacity: 0.8;
-  }
-  .btnDownloadLaby:hover {
+}
+.btnDownloadLaby:hover {
     background-color: black;
     transition: 0.5s;
-  }
+}
+.selectColo {
+    background-color: yellow;
+    display: grid;
+  width: 100%;
+  grid-template-columns: 50% 50%;
+  align-items: start;
+  justify-content: space-between;
+}
+.selectColo > select {
+    align-self: center;
+    width: 20%;
+    margin: 5% 5%;
+}
+

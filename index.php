@@ -12,8 +12,7 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_SANITIZE_STRING);
 
 <?php require 'header.php';?>
 
-<form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
-    <div class="selectColo">
+<form class="selectColo" action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
         <?php
         foreach($json_data as $draw){
             if(in_array($draw['theme'], $themes)) {
@@ -34,11 +33,7 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_SANITIZE_STRING);
                 }
             ?>
         </select>
-    </div>
-    
-    <div>
         <button type="submit">Select</button>
-    </div>
 </form>
 
 <div class="grid-wrapper">
