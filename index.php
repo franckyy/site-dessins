@@ -29,7 +29,7 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_SANITIZE_STRING);
             <?php
                 foreach($themes as $theme){
             ?>
-                    <option><?= $theme ?></option>
+                    <option value="<?= $theme ?>"><?= $theme ?></option>
             <?php
                 }
             ?>
@@ -41,22 +41,17 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_SANITIZE_STRING);
     </div>
 </form>
 
-<pre>
-    <?php
-        print_r($themesColo);
-    ?>
-</pre>
-
 <div class="grid-wrapper">
     <?php 
         foreach($json_data as $draw) {
-            if($draw['couleur'] == 'true') {
+            if(($draw['couleur'] == 'true') && (($draw['theme'] == $themesColo) || ($themesColo == 'Tout'))) {
+               
     ?>
                 <div>
                     <img id="dessin" src="<?php echo($dir . $draw["nom"] . '.jpg')?>" alt="dessin : <?= $draw['nom'] ?> ">
                     <button class="btnDownload">Download</button>
                 </div>
-    <?php               
+    <?php          
             }
         }
     ?>
