@@ -148,16 +148,22 @@ header {
     transition: 0.5s;
 }
 .selectColo {
-    background-color: yellow;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     display: grid;
-  width: 100%;
-  grid-template-columns: 50% 50%;
-  align-items: start;
-  justify-content: space-between;
+    width: 100%;
+    grid-template-columns: 20% 20% 80%;
 }
 .selectColo > select {
-    align-self: center;
-    width: 20%;
-    margin: 5% 5%;
+    font-size: 20px;
+    width: 50%;
+    border-radius: 10px;
+}
+.selectColo > button {
+    font-size: 20px;
+    width: 30%;
+    border-radius: 10px;
 }
 
