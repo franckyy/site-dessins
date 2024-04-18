@@ -6,6 +6,8 @@
     --colorScrollBarThumb: rgb(101, 144, 228);
     --colorBody: rgb(145, 176, 238);
     --colorBorder : rgb(34, 229, 14);
+    --colorBackSelectTheme : rgb(70, 235, 53);
+    --colorTextSelectTheme : rgb(0, 160, 148);
 }
 
 /* STYLE */
@@ -160,10 +162,22 @@ header {
     font-size: 20px;
     width: 50%;
     border-radius: 10px;
+    text-align-last:right;
+    padding-right: 10px;
+    direction: rtl;
+    background-color: var(--colorBackSelectTheme);
+    color: var(--colorTextSelectTheme);
 }
 .selectColo > button {
     font-size: 20px;
     width: 30%;
     border-radius: 10px;
+    background-color: var(--colorBackSelectTheme);
+    color: var(--colorTextSelectTheme);
+}
+option {
+    text-align-last:right;
+    padding-right: 29px;
+    direction: rtl;
 }
 

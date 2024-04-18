@@ -5,7 +5,7 @@ $dir = 'dessins/jpg/';
 $json = file_get_contents('datas/images.json');
 $json_data = json_decode($json,true);
 $themes = ["Tout"];
-$themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_SANITIZE_STRING);
+$themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_UNSAFE_RAW);
 ?>
 
 <body>
