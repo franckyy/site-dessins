@@ -12,7 +12,7 @@ const color_2_4 = "rgb(32, 91, 208)";
 const color_2_5 = "rgb(12, 66, 172)";
 
 const colorBackLogo = "rgb(149, 246, 139)";
-const color_3_2 = "rgb(106, 240, 92)";
+const colorSelectedLi = "rgb(106, 240, 92)";
 const colorBackSelectTheme = "rgb(70, 235, 53)";
 const color_3_4 = "rgb(34, 229, 14)";
 const color_3_5 = "rgb(20, 210, 0)";

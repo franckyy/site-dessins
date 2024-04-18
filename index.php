@@ -24,6 +24,7 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_UNSAFE_RAW);
 
         ?>
 
+        <label>Choisissez un thème de coloriage : </label>
         <select name="themesColo">
             <?php
                 foreach($themes as $theme){

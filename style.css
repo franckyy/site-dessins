@@ -8,6 +8,7 @@
     --colorBorder : rgb(34, 229, 14);
     --colorBackSelectTheme : rgb(70, 235, 53);
     --colorTextSelectTheme : rgb(0, 160, 148);
+    --colorSelectedLi : rgb(106, 240, 92);
 }
 
 /* STYLE */
@@ -43,8 +44,8 @@ a {
 ul {
     list-style-type: none;
 }
-.ulActive {
-    background: yellow;
+.ulActive{
+    background: var(--colorSelectedLi);
 }
 header {
     display: flex;
@@ -156,7 +157,16 @@ header {
     padding-right: 10px;
     display: grid;
     width: 100%;
-    grid-template-columns: 20% 20% 80%;
+    grid-template-columns: 30% 20% 20% 30%;
+}
+.selectColo > label {
+    font-size: 20px;
+    border-radius: 10px;
+    text-align-last:right;
+    padding-right: 10px;
+    direction: rtl;
+    background-color: var(--colorBackSelectTheme);
+    color: var(--colorTextSelectTheme);
 }
 .selectColo > select {
     font-size: 20px;
