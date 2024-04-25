@@ -19,5 +19,9 @@
     {"nom":"pur-sang_arabe_fleurs","theme":"animaux","couleur":"false"}, 
     {"nom":"pur-sang_arabe_fleurs_coul","theme":"animaux","couleur":"true"}, 
     {"nom":"souris","theme":"animaux","couleur":"false"}, 
-    {"nom":"souris_coul","theme":"animaux","couleur":"true"}
+    {"nom":"souris_coul","theme":"animaux","couleur":"true"}, 
+    {"nom":"abeille","theme":"animaux","couleur":"false"}, 
+    {"nom":"abeille_coul","theme":"animaux","couleur":"true"}, 
+    {"nom":"paysage","theme":"nature","couleur":"false"}, 
+    {"nom":"paysage_coul","theme":"nature","couleur":"true"}
 ]
