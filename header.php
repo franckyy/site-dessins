@@ -1,5 +1,5 @@
 <header>
-        <img src="assets/Logo_Site.gif" alt="logo" >
+        <img src="assets/Logo_Site_02.gif" alt="logo" >
             
 
         <ul class="header__menu">
