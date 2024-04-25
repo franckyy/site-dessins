@@ -1,0 +1,40 @@
+.selectColo {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 30% 20% 20% 30%;
+}
+.selectColo > label {
+    font-size: 20px;
+    border-radius: 10px;
+    text-align-last:right;
+    padding-right: 10px;
+    direction: rtl;
+    background-color: var(--colorBackSelectTheme);
+    color: var(--colorTextSelectTheme);
+}
+.selectColo > select {
+    font-size: 20px;
+    width: 50%;
+    border-radius: 10px;
+    text-align-last:right;
+    padding-right: 10px;
+    direction: rtl;
+    background-color: var(--colorBackSelectTheme);
+    color: var(--colorTextSelectTheme);
+}
+.selectColo > button {
+    font-size: 20px;
+    width: 30%;
+    border-radius: 10px;
+    background-color: var(--colorBackSelectTheme);
+    color: var(--colorTextSelectTheme);
+}
+option {
+    text-align-last:right;
+    padding-right: 29px;
+    direction: rtl;
+}
