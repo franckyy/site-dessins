@@ -5,7 +5,8 @@
     padding-right: 10px;
     display: grid;
     width: 100%;
-    grid-template-columns: 30% 20% 20% 30%;
+    overflow:hidden;
+    grid-template-columns: 3fr 2fr 3fr 1fr;
 }
 .selectColo > label {
     font-size: 20px;
@@ -18,7 +19,7 @@
 }
 .selectColo > select {
     font-size: 20px;
-    width: 50%;
+    width: 100%;
     border-radius: 10px;
     text-align-last:right;
     padding-right: 10px;
@@ -31,6 +32,7 @@
     border-radius: 10px;
     background-color: var(--colorBackSelectTheme);
     color: var(--colorTextSelectTheme);
+    margin-left: 20px;
 }
 option {
     text-align-last:right;
