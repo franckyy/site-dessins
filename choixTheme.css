@@ -11,10 +11,10 @@
     font-size: 20px;
     border-radius: 10px;
     text-align-last:right;
-    padding-right: 10px;
-    direction: rtl;
+    padding: 0px 10px 0px 10px;
     background-color: var(--colorBackSelectTheme);
     color: var(--colorTextSelectTheme);
+    margin-right: 30px;
 }
 .selectColo > select {
     font-size: 20px;
@@ -22,7 +22,6 @@
     border-radius: 10px;
     text-align-last:right;
     padding-right: 10px;
-    direction: rtl;
     background-color: var(--colorBackSelectTheme);
     color: var(--colorTextSelectTheme);
 }
