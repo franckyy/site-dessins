@@ -19,3 +19,8 @@ const color_3_5 = "rgb(20, 210, 0)";
 
 //document.getElementById("Logo").style.background = colorBackLogo;
 // document.querySelector("header").style.background = colorBackLogo;
+
+function openImg(nameImg) {
+    alert(nameImg);
+    window.location.href = 'labyrinthes.php?name=teddy';
+}
