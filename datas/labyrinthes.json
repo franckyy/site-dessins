@@ -6,5 +6,7 @@
     {"nom":"laby_03_solution_souris","solution":"true", "dossier":"03/"}, 
     {"nom":"laby_03_souris","solution":"false", "dossier":"03/"}, 
     {"nom":"laby_04_solution","solution":"true", "dossier":"04/"}, 
-    {"nom":"laby_04","solution":"false", "dossier":"04/"}
+    {"nom":"laby_04","solution":"false", "dossier":"04/"}, 
+    {"nom":"laby_05_solution","solution":"true", "dossier":"05/"}, 
+    {"nom":"laby_05","solution":"false", "dossier":"05/"}
 ]
