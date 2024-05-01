@@ -46,7 +46,7 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_UNSAFE_RAW);
                 <div>
                     <img id="dessin" src="<?php echo($dir . $draw["nom"] . '.jpg')?>" alt="dessin : <?= $draw['nom'] ?> ">
                     <button class="btnDownload"
-                            onclick="<?php echo("openImg(" . $draw["nom"] . ");") ?>">Download</button>
+                            onclick="<?php echo("openImg('" . $draw["nom"] . "')") ?>">Download</button>
                 </div>
     <?php          
             }

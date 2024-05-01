@@ -22,5 +22,6 @@ const color_3_5 = "rgb(20, 210, 0)";
 
 function openImg(nameImg) {
     alert(nameImg);
+    window.open('labyrinthes.php?name=' + nameImg, '_blank');
     window.location.href = 'labyrinthes.php?name=teddy';
 }
