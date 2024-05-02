@@ -1,15 +1,15 @@
 [
-    {"nom":"Abstrait","theme":"abstrait","couleur":"true"},
-    {"nom":"Chat_blanc","theme":"animaux","couleur":"true"},
-    {"nom":"Chat_gris","theme":"animaux","couleur":"true"},
-    {"nom":"Cheval_galop","theme":"animaux","couleur":"true"},
-    {"nom":"Cheval_mandala","theme":"animaux","couleur":"true"},
-    {"nom":"Cheval_rassemble","theme":"animaux","couleur":"true"},
-    {"nom":"Fleurs","theme":"nature","couleur":"true"}, 
-    {"nom":"Hirondelle","theme":"animaux","couleur":"true"}, 
-    {"nom":"Ours_geometrique","theme":"animaux","couleur":"true"},
-    {"nom":"Pur-sang_arabe_fleurs","theme":"animaux","couleur":"true"},
-    {"nom":"Souris","theme":"animaux","couleur":"true"},
-    {"nom":"Abeille","theme":"animaux","couleur":"true"}, 
-    {"nom":"Paysage","theme":"nature","couleur":"true"}
+    {"nom":"Abstrait","theme":"abstrait"},
+    {"nom":"Chat_blanc","theme":"animaux"},
+    {"nom":"Chat_gris","theme":"animaux"},
+    {"nom":"Cheval_galop","theme":"animaux"},
+    {"nom":"Cheval_mandala","theme":"animaux"},
+    {"nom":"Cheval_rassemble","theme":"animaux"},
+    {"nom":"Fleurs","theme":"nature"}, 
+    {"nom":"Hirondelle","theme":"animaux"}, 
+    {"nom":"Ours_geometrique","theme":"animaux"},
+    {"nom":"Pur-sang_arabe_fleurs","theme":"animaux"},
+    {"nom":"Souris","theme":"animaux"},
+    {"nom":"Abeille","theme":"animaux"}, 
+    {"nom":"Paysage","theme":"nature"}
 ]
