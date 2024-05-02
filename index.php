@@ -40,7 +40,7 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_UNSAFE_RAW);
 <div class="grid-wrapper">
     <?php 
         foreach($json_data as $draw) {
-            if(($draw['couleur'] == 'true') && (($draw['theme'] == $themesColo) || ($themesColo == 'Tout'))) {
+            if(($draw['theme'] == $themesColo) || ($themesColo == 'Tout')) {
                
     ?>
                 <div>
