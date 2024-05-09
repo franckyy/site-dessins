@@ -3,15 +3,17 @@ $title = "Deviner le chiffre";
 $aDeviner = 150;
 require 'head.php';
 ?>
+
+<script src="./devineChiffre.js"></script>
+
+<script  type="text/javaScript">
+    let aDeviner = generateChiffreRand();
+</script>
+
 <body>
 
 <?php require 'header.php';?>
 
-<pre>
-    <?php
-        var_dump($_GET)
-    ?>
-</pre>
 <?php
     if (isset($_GET['chiffre'])){
         if ($_GET['chiffre'] > $aDeviner) {
@@ -24,17 +26,16 @@ require 'head.php';
     }
 ?>
 
-<form action="/devineChiffre.php" method="GET">
-    <input type="number" name="chiffre" placeholder="entre 0 et 1000" 
-    value="
-        <?  
-            if (isset($_GET['chiffre'])){
-                echo (htmlentities($_GET['chiffre'])); 
-            }
-        ?>
-    ">
+<input id="chiffreUser" type="number" name="chiffre" placeholder="entre 0 et 1000" 
+value="
+    <?  
+        if (isset($_GET['chiffre'])){
+            echo (htmlentities($_GET['chiffre'])); 
+        }
+    ?>
+">
             
-    <button type="submit">deviner</button>
-</form>
+<button type="button" onclick="verifyChiffre(aDeviner)">deviner</button>
+
 
 <?php require 'footer.php';?>

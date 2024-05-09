@@ -55,6 +55,8 @@ $themesColo = filter_input(INPUT_POST, 'themesColo', FILTER_UNSAFE_RAW);
 </div>
 
 <script src="./index.js"></script>
+
+<script src="./devineChiffre.js"></script>
 </body>
 
 <?php require 'footer.php';?>
