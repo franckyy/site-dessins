@@ -28,8 +28,8 @@
     border-radius: 40px;
 }
 
-#textareaDC {
-    font-size: 2rem;
+p {
+    font-size: 3rem;
     margin-top: 20px;
     background-color: var(--colorBackButton);
     grid-column: 1/5;
@@ -37,8 +37,8 @@
     border-radius: 40px;
     margin-left: 10%;
     margin-right: 10%;
-    text-align: center;
-    vertical-align:baseline;
+    text-align:center;
+    line-height: 220%;
     border: thick double var(--colorBackInput);
     height: 90%;
 }
