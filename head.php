@@ -18,5 +18,6 @@
     <link rel="stylesheet" href="./choixTheme.css">
     <link rel="stylesheet" href="./labyrinthes.css">
     <link rel="stylesheet" href="./responsive.css">
+    <link rel="stylesheet" href="./devineChiffre.css">
 
 </head>

@@ -26,16 +26,19 @@ require 'head.php';
     }
 ?>
 
-<input id="chiffreUser" type="number" name="chiffre" placeholder="entre 0 et 1000" 
-value="
-    <?  
-        if (isset($_GET['chiffre'])){
-            echo (htmlentities($_GET['chiffre'])); 
-        }
-    ?>
-">
-            
-<button type="button" onclick="verifyChiffre(aDeviner)">deviner</button>
+<div class="containerDC">
 
+    <input class="champsJeuDC" id="chiffreUser" type="text" name="chiffre" placeholder="entre 0 et 1000" 
+    value="
+        <?
+            if (isset($_GET['chiffre'])){
+                echo (htmlentities($_GET['chiffre'])); 
+            }
+        ?>
+    ">
+                
+    <button class="champsJeuDC" id="btnDeviner" type="button" onclick="verifyChiffre(aDeviner)">DEVINER</button>
+
+</div>
 
 <?php require 'footer.php';?>
