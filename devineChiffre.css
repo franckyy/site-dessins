@@ -39,7 +39,6 @@
     margin-right: 10%;
     text-align: center;
     vertical-align:baseline;
-    resize: none;
     border: thick double var(--colorBackInput);
     height: 90%;
 }

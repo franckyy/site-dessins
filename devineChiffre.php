@@ -28,7 +28,6 @@ require 'head.php';
 
 <div class="containerDC">
 
-    <div id="textareaDC"></div>
     <input class="champsJeuDC" id="chiffreUser" type="text" name="chiffre" placeholder="entre 0 et 1000" 
     value="
         <?
@@ -40,6 +39,7 @@ require 'head.php';
                 
     <button class="champsJeuDC" id="btnDeviner" type="button" onclick="verifyChiffre(aDeviner)">DEVINER</button>
 
+    <p id="textareaDC"></p>
 </div>
 
 <?php require 'footer.php';?>

@@ -7,10 +7,10 @@ function generateChiffreRand() {
 function verifyChiffre(aDeviner) {
     let chiffreUser = document.getElementById("chiffreUser").value;
     if(chiffreUser > aDeviner){
-        alert("chiffre trop grand");
+        document.getElementById("textareaDC").innerHTML = "chiffre trop grand";
     } else if(chiffreUser < aDeviner){
-        alert("chiffre trop petit");
+        document.getElementById("textareaDC").innerHTML = "chiffre trop petit";
     } else {
-        alert("bravo !!!");
+        document.getElementById("textareaDC").innerHTML = "Bravo, vous avez deviné le chiffre : " + aDeviner;
     }
 }
