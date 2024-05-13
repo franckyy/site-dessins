@@ -20,7 +20,7 @@ function verifyChiffre(aDeviner) {
         //document.getElementById("textareaDC").innerHTML = "Vous avez deviné le chiffre : " + aDeviner;
         aDeviner = generateChiffreRand();
         sleep(6000).then(() => document.getElementById("textareaDC").innerHTML = "Un nouveau nombre a été généré !");
-        sleep(8000).then(() => document.getElementById("textareaDC").innerHTML = "");
+        sleep(9000).then(() => document.getElementById("textareaDC").innerHTML = "");
     }
 }
 
