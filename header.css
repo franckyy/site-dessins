@@ -7,8 +7,17 @@ a {
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+#logoImg{
+    width: 20%;
+    height: 20%;
+
+}
 ul {
     list-style-type: none;
+}
+li > a{
+    font-size: 24px;
+    font-weight: 600;
 }
 .ulActive{
     background: var(--colorSelectedLi);
