@@ -22,13 +22,6 @@ function verifyChiffre(aDeviner) {
         sleep(9000).then(() => document.getElementById("textareaDC").innerHTML = "");
     }
 }
-
-function attente(tempsAtt) {
-    let x = 1;
-    do{
-        x++;
-    } while (x < tempsAtt);
-}
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
