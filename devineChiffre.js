@@ -10,14 +10,13 @@ function generateChiffreRand() {
 function verifyChiffre(aDeviner) {
     let chiffreUser = document.getElementById("chiffreUser").value;
     if(chiffreUser > aDeviner){
-        document.getElementById("textareaDC").innerHTML = "chiffre trop grand "  + aDeviner;
+        document.getElementById("textareaDC").innerHTML = "chiffre trop grand ";
     } else if(chiffreUser < aDeviner){
-        document.getElementById("textareaDC").innerHTML = "chiffre trop petit " + aDeviner;
+        document.getElementById("textareaDC").innerHTML = "chiffre trop petit ";
     } else {
         let texteChiffre = aDeviner;
         document.getElementById("textareaDC").innerHTML = "Bravo !!!";
         sleep(3000).then(() => document.getElementById("textareaDC").innerHTML = "Vous avez deviné le chiffre : " + texteChiffre);
-        //document.getElementById("textareaDC").innerHTML = "Vous avez deviné le chiffre : " + aDeviner;
         aDeviner = generateChiffreRand();
         sleep(6000).then(() => document.getElementById("textareaDC").innerHTML = "Un nouveau nombre a été généré !");
         sleep(9000).then(() => document.getElementById("textareaDC").innerHTML = "");
