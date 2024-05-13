@@ -10,8 +10,6 @@ require 'head.php';
 <?php require 'header.php';?>
 
 <div class="containerDC">
-<h1 id="h1text"><script  type="text/javaScript"> document.getElementById("h1text").innerHTML = aDeviner </script></h1>
-
     <input class="champsJeuDC" id="chiffreUser" type="text" name="chiffre" placeholder="entre 0 et 1000">
                 
     <button class="champsJeuDC" id="btnDeviner" type="button" onclick="verifyChiffre(aDeviner)">DEVINER</button>
