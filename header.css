@@ -1,7 +1,7 @@
 a {
     text-decoration: 0;
-    color: rgb(0, 160, 148);
-    text-shadow: 1px 1px 2px var(--colorTextP), 0 0 1em var(--colorTextP), 0 0 0.2em var(--colorTextP);
+    color: var(--colorTextSelectTheme);
+    text-shadow: 1px 1px 2px var(--colorBackInput), 0 0 1em var(--colorTextP), 0 0 0.2em var(--colorSelectedLi);
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 2px;
@@ -20,7 +20,7 @@ li > a{
 }
 .ulActive{
     /*background: var(--colorSelectedLi);*/
-    text-shadow: 1px 1px 2px var(--colorBackInput), 0 0 1em var(--colorTextP), 0 0 0.2em var(--colorTextP);
+    text-shadow: 1px 1px 2px var(--colorBackLogo), 0 0 1em var(--colorTextInput), 0 0 0.2em var(--colorSelectedLi);
 }
 header {
     display: flex;
