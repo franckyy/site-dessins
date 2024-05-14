@@ -1,6 +1,6 @@
 .btnDownloadLaby {
     position: absolute;
-    transform: translate(80%, 200%);
+    transform: translate(50%, 200%);
     -ms-transform: translate(-50%, -50%);
     background-color: #555;
     color: white;
