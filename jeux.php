@@ -1,7 +1,7 @@
 <?php 
 $title = "Jeux";
 require 'head.php';
-$dir = 'assets/jeux/';
+$dir = 'assets/iconsjeux/';
 $json = file_get_contents('datas/iconsJeux.json');
 $json_data = json_decode($json,true);
 ?>
@@ -14,9 +14,9 @@ $json_data = json_decode($json,true);
         foreach($json_data as $icon) {  
     ?>
         <div>
-            <img id="dessin" src="<?php echo($dir . $icon["nom"])?>" alt="dessin : <?= $icon['nom'] ?> ">
+            <img id="dessin" src="<?php echo($dir . $icon["nom"] . '.jpg')?>" alt="iconeJeu : <?= $icon['nom'] ?> ">
             <button class="btnDownload"
-                    onclick="./devineChiffre.php">Download</button>
+                    onclick="window.open('devineChiffre.php','main')">JOUER</button>
         </div>
     <?php
         }
