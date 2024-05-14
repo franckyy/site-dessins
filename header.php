@@ -53,7 +53,6 @@
             </li>
         </ul>
         <div class="header__buttons">
-            <a href="#">Sign in</a>
-            <a href="#">Sign up</a>
+            <a href="https://www.paypal.com/donate/?hosted_button_id=CUJ2FNRCT3RFE">Faire un don up</a>
         </div>
     </header>
