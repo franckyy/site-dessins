@@ -21,5 +21,5 @@ const colorTextInput = "rgb(20, 210, 0)";
 // document.querySelector("header").style.background = colorBackLogo;
 
 function openImg(nameImg) {
-    window.open('popupColoriage.php?name=' + nameImg, '_blank','popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+    window.open('popupColoriage.php?name=' + nameImg, '_blank','popUpWindow','height=400,width=300,left=100,top=-100,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes');
 }
