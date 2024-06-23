@@ -16,7 +16,7 @@ $json_data = json_decode($json,true);
         <div>
             <img id="dessin" src="<?php echo($dir . $icon["nom"] . '.jpg')?>" alt="iconeJeu : <?= $icon['nom'] ?> ">
             <button class="btnDownload"
-                    onclick="window.open('devineChiffre.php','main')">JOUER</button>
+                    onclick="window.open(<?php echo('\'' . $icon["file"] . '\'') ?>,'main')">JOUER</button>
         </div>
     <?php
         }
