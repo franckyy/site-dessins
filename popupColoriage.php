@@ -4,13 +4,10 @@ require 'head.php';
 ?>
 
 <body>
-<p>Veillez renseigner votre email afin de recevoir votre coloriage :</p>
-<form onsubmit="return gestionMail(this)">
-    <input type="email" placeholder="votre email">
-    <button type="submit">VALIDER</button>
-</form>
 
-<script src="./indpopupColoriage.js"></script>
+<img src="rattraper ici le name de l'image qui est passé en get depuis index.js" alt="Trulli" width="500" height="333">
+
+<script src="./popupColoriage.js"></script>
 
 </body>
 

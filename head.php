@@ -19,5 +19,6 @@
     <link rel="stylesheet" href="./labyrinthes.css">
     <link rel="stylesheet" href="./responsive.css">
     <link rel="stylesheet" href="./devineChiffre.css">
+    <link rel="stylesheet" href="./popupColoriage.css">
 
 </head>
