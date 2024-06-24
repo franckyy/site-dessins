@@ -6,7 +6,7 @@
     </head>
 
     <body>
-        <canvas id="myCanvas" width="480" height="320"></canvas>
+        <canvas id="myCanvas" width="1024" height="640"></canvas>
 
 
 
