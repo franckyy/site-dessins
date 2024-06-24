@@ -1,7 +1,7 @@
 [
     {"nom":"Devine_Chiffre", "file":"devineChiffre.php"},
     {"nom":"tablesMultiplication", "file":"devineChiffre.php"},
-    {"nom":"Casse_briques", "file":"cassbrik.php"},
+    {"nom":"Casse_briques", "file":"cassbrik/cassbrik.php"},
     {"nom":"Devine_Chiffre", "file":"devineChiffre.php"},
     {"nom":"Devine_Chiffre", "file":"devineChiffre.php"}
 ]
