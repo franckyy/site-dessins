@@ -7,10 +7,9 @@
 
     <body>
         <canvas id="myCanvas" width="1024" height="640"></canvas>
-
-
-
-        <script src="./cassbrik.js"></script>
+        <button id="runButton">Start game</button>
+        
+        <script src="./cassbrik_draw.js"></script>
     </body>
 
 </html>
