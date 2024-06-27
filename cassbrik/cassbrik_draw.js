@@ -10,6 +10,7 @@ let dy = -6;
 const paddleHeight = 10;
 var paddleWidth = 100;
 let paddleX = (canvas.width - paddleWidth) / 2;
+const paddleXoffset = 5;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -100,7 +101,7 @@ function draw(){
     if(y + dy < ballRadius){
         dy = -dy;
     } else if(y + dy > canvas.height - ballRadius - paddleHeight){
-        if(x > paddleX - 5 && x < paddleX + paddleWidth + 5){
+        if(x > paddleX - paddleXoffset && x < paddleX + paddleWidth + paddleXoffset){
             dy = -dy;
         }else{
             lives--;
