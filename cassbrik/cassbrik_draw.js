@@ -16,6 +16,7 @@ let leftPressed = false;
 
 var interval = setInterval(draw, 10);
 
+//on peut mettre 16 briques de 50 px de large sur une ligne
 const brickRowCount = 3;
 const brickColumnCount = 16;
 const brickWidth = 50;
