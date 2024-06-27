@@ -1,6 +1,6 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-const ballRadius = 6;
+const ballRadius = 4;
 
 let x = canvas.width / 2;
 let dx = 2;
@@ -99,8 +99,8 @@ function draw(){
 
     if(y + dy < ballRadius){
         dy = -dy;
-    } else if(y + dy > canvas.height - ballRadius){
-        if(x > paddleX && x < paddleX + paddleWidth){
+    } else if(y + dy > canvas.height - ballRadius - paddleHeight){
+        if(x > paddleX - 5 && x < paddleX + paddleWidth + 5){
             dy = -dy;
         }else{
             lives--;
@@ -180,7 +180,7 @@ function collisionDetection(){
                     if(score == brickRowCount * brickColumnCount * 11 ){
                         alert("Bravo ! c'est gagné !");
                         document.location.reload();
-//                        clearInterval(interval);
+                        clearInterval(interval);
                     }
                 }
             } 
