@@ -17,9 +17,9 @@ let leftPressed = false;
 var interval = setInterval(draw, 10);
 
 const brickRowCount = 3;
-const brickColumnCount = 11;
-const brickWidth = 75;
-const brickHeight = 20;
+const brickColumnCount = 16;
+const brickWidth = 50;
+const brickHeight = 15;
 const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
@@ -27,6 +27,7 @@ const brickOffsetLeft = 30;
 let score = 0;
 let lives = 3;
 
+//tableau contenant les colonnes et les lignes de briques
 let bricks = [];
 for(let c = 0; c < brickColumnCount; c++){
     bricks[c] = [];
