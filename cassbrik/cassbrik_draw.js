@@ -29,7 +29,81 @@ const brickOffsetLeft = 30;
 let score = 0;
 let lives = 3;
 
+let level = 1;
+
+//Tableau de création des briques niveau 1 -> [lignes jusqu'à 5, colonnes jusqu'à 16, type de brique]
+let bricksLvl1 = [
+    [8, 1, 2],
+    [9, 1, 2],
+    [7, 2, 1],
+    [8, 2, 1],
+    [9, 2, 1],
+    [10, 2, 1]
+]
+
+let bricksLvl2 = [
+    [7, 1, 2],
+    [8, 1, 2],
+    [9, 1, 2],
+    [10, 1, 2],
+    [7, 2, 1],
+    [8, 2, 1],
+    [9, 2, 1],
+    [10, 2, 1]
+]
+
+let bricksArrayLvl;
+
+switch(level){
+    case 1:
+        bricksArrayLvl = bricksLvl1;
+        break;
+    case 2:
+        bricksArrayLvl = bricksLvl2;
+        break;
+    default:
+        bricksArrayLvl = bricksLvl1;
+}
+
+//function pour créer des briques en fonction du type
+function createBricks(){
+    let color = "#000000";
+    let status = 1;
+
+    for(let br in bricksLvl1){
+        //alert(" brique line : " + bricksArrayLvl[br][0] + ", brick column : " + bricksArrayLvl[br][1] + " , brick type : " + bricksArrayLvl[br][2]);
+    
+    
+        switch(bricksArrayLvl[br][2]){
+            case 1:
+                color = "#842E1B";
+                status = 1;
+                break;
+            case 2:
+                color = "#FFD700";
+                status = 2;
+                break;
+            default:
+                color = "#842E1B";
+                status = 1;
+        }
+    
+        if(status >= 1){
+            const brickX = bricksArrayLvl[br][0] * (brickWidth + brickPadding) + brickOffsetLeft;
+            const brickY = bricksArrayLvl[br][1] * (brickHeight + brickPadding) + brickOffsetTop;
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+    }
+
+}
+
 //tableau contenant les colonnes et les lignes de briques
+/*
 let bricks = [];
 for(let c = 0; c < brickColumnCount; c++){
     bricks[c] = [];
@@ -38,6 +112,7 @@ for(let c = 0; c < brickColumnCount; c++){
         bricks[c][r] = {x:0, y:0, status: 2};
     }
 }
+*/
 
 function drawLives(){
     ctx.font = "16px arial";
@@ -87,7 +162,8 @@ function drawPaddle(){
 
 function draw(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBricks();
+    //drawBricks();
+    createBricks();
     drawBall();
     drawPaddle();
     collisionDetection();
@@ -164,27 +240,27 @@ function mouseMoveHandler(e){
 }
 
 function collisionDetection(){
-    for(let c = 0; c < brickColumnCount; c++){
-        for(let r = 0; r < brickRowCount; r++){
-            let b = bricks[c][r];
-            if(b.status >= 1){
-                if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-                    dy = -dy;
-                    b.status -= 1;
-                    //mise à jour du score
-                    if(b.status < 1){
-                        score = score + 10;
-                    } else {
-                        score++;
-                    }
-                    //fin du jeu
-                    if(score == brickRowCount * brickColumnCount * 11 ){
-                        alert("Bravo ! c'est gagné !");
-                        document.location.reload();
-                        clearInterval(interval);
-                    }
+    for(let br in bricksLvl1){
+
+        if(bricksArrayLvl[br][2] >= 1){
+            if (x > bricksArrayLvl[br][0] && x < bricksArrayLvl[br][0] + brickWidth && y > bricksArrayLvl[br][1] && y < bricksArrayLvl[br][1] + brickHeight) {
+                dy = -dy;
+                ///regression du status
+                bricksArrayLvl[br][2] -= 1;
+                //mise à jour du score
+                if(bricksArrayLvl[br][2] < 1){
+                    score = score + 10;
+                } else {
+                    score++;
                 }
-            } 
-        }
+                //fin du jeu
+                if(score == brickRowCount * brickColumnCount * 11 ){
+                    alert("Bravo ! c'est gagné !");
+                    level++;
+                    document.location.reload();
+                    clearInterval(interval);
+                }
+            }
+        } 
     }
 }
