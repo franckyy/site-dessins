@@ -1,27 +1,29 @@
-
-var aDeviner = null;
-generateChiffreRand();
+let aDeviner = generateChiffreRand();
 
 function generateChiffreRand() {
-    let randomNr = Math.random() * 1001;
-    aDeviner = Math.floor(randomNr);
-} 
-
-function verifyChiffre(aDeviner) {
-    let chiffreUser = document.getElementById("chiffreUser").value;
-    if(chiffreUser > aDeviner){
-        document.getElementById("textareaDC").innerHTML = "chiffre trop grand ";
-    } else if(chiffreUser < aDeviner){
-        document.getElementById("textareaDC").innerHTML = "chiffre trop petit ";
-    } else {
-        let texteChiffre = aDeviner;
-        document.getElementById("textareaDC").innerHTML = "Bravo !!!";
-        sleep(3000).then(() => document.getElementById("textareaDC").innerHTML = "Vous avez deviné le chiffre : " + texteChiffre);
-        aDeviner = generateChiffreRand();
-        sleep(6000).then(() => document.getElementById("textareaDC").innerHTML = "Un nouveau nombre a été généré !");
-        sleep(9000).then(() => document.getElementById("textareaDC").innerHTML = "");
-    }
+    return Math.floor(Math.random() * 1001); // entre 0 et 1000
 }
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+
+function verifyChiffre() {
+    const zone = document.getElementById("textareaDC");
+    const n = parseInt(document.getElementById("chiffreUser").value, 10);
+
+    // Saisie vide, texte ou hors limites
+    if (isNaN(n) || n < 0 || n > 1000) {
+        zone.textContent = "Entre un nombre entre 0 et 1000";
+        return;
+    }
+
+    if (n > aDeviner) {
+        zone.textContent = "chiffre trop grand";
+    } else if (n < aDeviner) {
+        zone.textContent = "chiffre trop petit";
+    } else {
+        const trouve = aDeviner;
+        zone.textContent = "Bravo !!!";
+        aDeviner = generateChiffreRand();
+        setTimeout(() => { zone.textContent = "Vous avez deviné le chiffre : " + trouve; }, 3000);
+        setTimeout(() => { zone.textContent = "Un nouveau nombre a été généré !"; }, 6000);
+        setTimeout(() => { zone.textContent = ""; }, 9000);
+    }
 }
