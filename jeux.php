@@ -2,26 +2,34 @@
 $title = "Jeux";
 require 'head.php';
 $dir = 'assets/iconsJeux/';
-$json = file_get_contents('datas/iconsJeux.json');
-$json_data = json_decode($json,true);
+
+// Lecture du JSON avec gestion d'erreur
+$json = @file_get_contents('datas/iconsJeux.json');
+$json_data = $json !== false ? json_decode($json, true) : null;
+if (!is_array($json_data)) {
+    $json_data = [];
+    $erreurJson = true;
+}
 ?>
 <body>
 <?php require 'header.php';?>
 <h3>Jeux</h3>
 
 <div class="grid-wrapper">
-    <?php 
-        foreach($json_data as $icon) {  
-    ?>
+    <?php if (!empty($erreurJson)): ?>
+        <p>Les jeux sont momentanément indisponibles.</p>
+    <?php endif; ?>
+
+    <?php foreach ($json_data as $icon): ?>
         <div>
-            <img id="dessin" src="<?php echo($dir . $icon["nom"] . '.jpg')?>" alt="iconeJeu : <?= $icon['nom'] ?> ">
-            <button class="btnDownload"
-                    onclick="window.open(<?php echo('\'' . $icon["file"] . '\'') ?>,'main')">JOUER</button>
+            <img class="dessin" loading="lazy"
+                 src="<?= htmlspecialchars($dir . $icon['nom'] . '.jpg') ?>"
+                 alt="icône du jeu : <?= htmlspecialchars($icon['nom']) ?>">
+            <a class="btnDownload" href="<?= htmlspecialchars($icon['file']) ?>">JOUER</a>
         </div>
-    <?php
-        }
-    ?>
+    <?php endforeach; ?>
 </div>
 
-<a href="/devineChiffre.php">Jeu deviner le chiffre</a>
+</body>
+
 <?php require 'footer.php';?>
