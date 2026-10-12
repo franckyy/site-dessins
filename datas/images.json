@@ -1,7 +1,6 @@
 [
     {"nom":"Abstrait","theme":"abstrait"},
     {"nom":"Chat_blanc","theme":"animaux"},
-    {"nom":"Chat_gris","theme":"animaux"},
     {"nom":"Cheval_galop","theme":"animaux"},
     {"nom":"Cheval_mandala","theme":"animaux"},
     {"nom":"Cheval_rassemble","theme":"animaux"},

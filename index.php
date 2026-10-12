@@ -2,6 +2,7 @@
 $title = "Coloriages";
 require 'head.php';
 $dir = 'dessins/jpg/';
+$dirPdf = 'dessins/pdf/';
 
 // Lecture du JSON avec gestion d'erreur
 $json = @file_get_contents('datas/images.json');
@@ -44,18 +45,19 @@ if (!in_array($themesColo, $themes, true)) {
 
     <?php foreach ($json_data as $draw): ?>
         <?php if ($themesColo === 'Tout' || $draw['theme'] === $themesColo): ?>
+            <?php $pdf = $dirPdf . $draw['nom'] . '.pdf'; ?>
             <div>
                 <img class="dessin" loading="lazy"
                      src="<?= htmlspecialchars($dir . $draw['nom'] . '_coul.jpg') ?>"
                      alt="dessin : <?= htmlspecialchars($draw['nom']) ?>">
-                <button class="btnDownload"
-                        onclick="openImg('<?= htmlspecialchars($draw['nom'], ENT_QUOTES) ?>')">Download</button>
+                <?php if (file_exists($pdf)): ?>
+                    <a class="btnDownload" href="<?= htmlspecialchars($pdf) ?>" download>Télécharger</a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
 
-<script src="./index.js"></script>
 </body>
 
 <?php require 'footer.php';?>

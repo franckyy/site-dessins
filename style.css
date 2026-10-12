@@ -37,6 +37,7 @@ body {
     grid-auto-flow: dense;
 }
 .grid-wrapper > div {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,11 +56,17 @@ body {
 }
 .btnDownload {
     position: absolute;
-    transform: translate(50%, 200%);
-    -ms-transform: translate(-50%, -50%);
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #555;
     color: white;
     font-size: 16px;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-shadow: none;
     padding: 12px 24px;
     border: none;
     cursor: pointer;
