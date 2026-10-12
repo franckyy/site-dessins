@@ -1,7 +1,7 @@
 <?php 
 $title = "Jeux";
 require 'head.php';
-$dir = 'assets/iconsjeux/';
+$dir = 'assets/iconsJeux/';
 $json = file_get_contents('datas/iconsJeux.json');
 $json_data = json_decode($json,true);
 ?>
