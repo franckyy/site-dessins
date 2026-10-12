@@ -10,5 +10,12 @@
     {"nom":"Pur-sang_arabe_fleurs","theme":"animaux"},
     {"nom":"Souris","theme":"animaux"},
     {"nom":"Abeille","theme":"animaux"}, 
-    {"nom":"Paysage","theme":"nature"}
+    {"nom":"Paysage","theme":"nature"}, 
+    {"nom":"Dragon_cerf","theme":"animaux"}, 
+    {"nom":"Dragon_craintif","theme":"animaux"}, 
+    {"nom":"Dragon_feu","theme":"animaux"}, 
+    {"nom":"Dragon_laineux","theme":"animaux"}, 
+    {"nom":"Dragon_long","theme":"animaux"}, 
+    {"nom":"Dragon_repos","theme":"animaux"}, 
+    {"nom":"Dragon_statue","theme":"animaux"}
 ]
