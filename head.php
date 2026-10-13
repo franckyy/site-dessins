@@ -12,7 +12,8 @@
             }
         ?>
     </title>
-
+    <link rel="icon" href="./assets/Logo_site_02.gif">
+    
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./choixTheme.css">
