@@ -1,0 +1,66 @@
+/* Page d'un coloriage */
+.fiche-coloriage {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
+    text-align: center;
+}
+.fiche-coloriage h1 {
+    font-size: 2rem;
+    color: var(--colorTextP);
+    margin-bottom: 15px;
+}
+.fiche-coloriage img {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border: thick double var(--colorBorder);
+    border-radius: 10px;
+}
+.fiche-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--colorTextP);
+    max-width: 700px;
+    margin: 20px auto;
+}
+/* On neutralise le style global des liens (majuscules, ombres, taille réduite en responsive) */
+.fiche-coloriage a {
+    text-transform: none;
+    letter-spacing: normal;
+    text-shadow: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--colorTextP);
+    text-decoration: underline;
+}
+.fiche-coloriage a.btnTelecharger {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 14px 30px;
+    border-radius: 40px;
+    text-decoration: none;
+    background-color: var(--colorBackButton);
+    color: var(--colorTextSelectTheme);
+}
+.fiche-coloriage a.btnTelecharger:hover {
+    filter: brightness(0.92);
+}
+.fiche-liens {
+    margin-top: 25px;
+}
+
+/* Grille de index.php : l'image est maintenant dans un lien */
+.grid-wrapper > div > a.lienDessin {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.grid-wrapper > div > a.lienDessin > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
