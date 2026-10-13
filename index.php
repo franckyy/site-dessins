@@ -68,6 +68,5 @@ if (!in_array($themesColo, $themes, true)) {
     <?php endforeach; ?>
 </div>
 
-</body>
 
 <?php require 'footer.php';?>

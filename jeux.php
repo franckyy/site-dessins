@@ -30,6 +30,5 @@ if (!is_array($json_data)) {
     <?php endforeach; ?>
 </div>
 
-</body>
 
 <?php require 'footer.php';?>

@@ -16,6 +16,5 @@ require 'head.php';
 </div>
 
 <script src="./devineChiffre.js"></script>
-</body>
 
 <?php require 'footer.php';?>

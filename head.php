@@ -16,5 +16,6 @@
     <link rel="stylesheet" href="./responsive.css">
     <link rel="stylesheet" href="./devineChiffre.css">
     <link rel="stylesheet" href="./coloriage.css">
+    <link rel="stylesheet" href="./legal.css">
 
 </head>

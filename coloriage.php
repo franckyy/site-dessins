@@ -32,7 +32,6 @@ if ($draw === null) {
         <p class="fiche-description">Ce coloriage n'existe pas ou a été déplacé.</p>
         <p class="fiche-liens"><a href="index.php">Voir tous les coloriages</a></p>
     </main>
-    </body>
     <?php
     require 'footer.php';
     exit;
@@ -78,6 +77,5 @@ require 'head.php';
     </p>
 </main>
 
-</body>
 
 <?php require 'footer.php'; ?>

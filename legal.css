@@ -1,0 +1,61 @@
+/* Pages légales */
+.page-legale {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+    line-height: 1.7;
+    color: var(--colorTextP);
+}
+.page-legale h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+.page-legale h2 {
+    font-size: 1.3rem;
+    margin: 25px 0 8px;
+}
+.page-legale p {
+    margin-bottom: 10px;
+}
+.page-legale .maj {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+/* On neutralise le style global des liens (majuscules, ombres, taille réduite en responsive) */
+.page-legale a,
+.pied a {
+    text-transform: none;
+    letter-spacing: normal;
+    text-shadow: none;
+    font-size: inherit;
+    font-weight: 400;
+    color: var(--colorTextP);
+    text-decoration: underline;
+}
+/* Valeur à remplir dans config_site.php */
+.a-completer {
+    background: #fff3cd;
+    color: #7a4b00;
+    font-weight: 700;
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+/* Pied de page */
+.pied {
+    margin-top: 40px;
+    padding: 20px 15px;
+    text-align: center;
+    font-size: 15px;
+    border-top: 2px solid #000;
+    background-color: var(--colorBackLogo);
+    color: var(--colorTextP);
+}
+.pied nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 25px;
+    margin-bottom: 8px;
+}
