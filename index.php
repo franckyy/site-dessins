@@ -2,6 +2,7 @@
 $title = "Coloriages";
 require 'head.php';
 $dir = 'dessins/jpg/';
+$dirMini = 'dessins/miniatures/';
 $dirPdf = 'dessins/pdf/';
 
 // Lecture du JSON avec gestion d'erreur
@@ -45,10 +46,16 @@ if (!in_array($themesColo, $themes, true)) {
 
     <?php foreach ($json_data as $draw): ?>
         <?php if ($themesColo === 'Tout' || $draw['theme'] === $themesColo): ?>
-            <?php $pdf = $dirPdf . $draw['nom'] . '.pdf'; ?>
+            <?php
+                $pdf = $dirPdf . $draw['nom'] . '.pdf';
+                $src = $dirMini . $draw['nom'] . '_coul.jpg';
+                if (!file_exists($src)) {
+                    $src = $dir . $draw['nom'] . '_coul.jpg'; // repli si la miniature n'existe pas encore
+                }
+            ?>
             <div>
                 <img class="dessin" loading="lazy"
-                     src="<?= htmlspecialchars($dir . $draw['nom'] . '_coul.jpg') ?>"
+                     src="<?= htmlspecialchars($src) ?>"
                      alt="dessin : <?= htmlspecialchars($draw['nom']) ?>">
                 <?php if (file_exists($pdf)): ?>
                     <a class="btnDownload" href="<?= htmlspecialchars($pdf) ?>" download>Télécharger</a>
