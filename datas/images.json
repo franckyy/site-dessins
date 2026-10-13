@@ -11,11 +11,11 @@
     {"nom":"Souris","theme":"animaux","titre":"Une souris reniflant l'air","description":"Un texte qui décrit ce que montre le dessin..."},
     {"nom":"Abeille","theme":"animaux","titre":"Abeille en vol","description":"Un texte qui décrit ce que montre le dessin..."}, 
     {"nom":"Paysage","theme":"nature","titre":"Paysage stylisé","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_cerf","theme":"animaux","titre":"Un dragon avec des bois de cerf","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_craintif","theme":"animaux","titre":"Un dragon un peu craintif","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_feu","theme":"animaux","titre":"Un dragon de feu","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_laineux","theme":"animaux","titre":"Un dragon laineux","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_long","theme":"animaux","titre":"Un dragon très long","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_repos","theme":"animaux","titre":"Un dragon au repos","description":"Un texte qui décrit ce que montre le dessin..."}, 
-    {"nom":"Dragon_statue","theme":"animaux","titre":"Une statue dragon dans un style égyptien","description":"Un texte qui décrit ce que montre le dessin..."}
+    {"nom":"Dragon_bois","theme":"animaux","titre":"Un dragon des bois","description":"Un dragon qui vit dans les bois et forêts ..."}, 
+    {"nom":"Dragon_mante","theme":"animaux","titre":"Un dragon mante religieuse","description":"Un dragon qui à des particularités de la mante religieuse ..."}, 
+    {"nom":"Dragon_feu","theme":"animaux","titre":"Un dragon de feu","description":"Un dragon qui crache du feu ..."}, 
+    {"nom":"Dragon_ombre","theme":"animaux","titre":"Un dragon de l'ombre'","description":"Un dragon qui disparait dans l'ombre'..."}, 
+    {"nom":"Dragon_eau","theme":"animaux","titre":"Un dragon de l'eau'","description":"Un dragon qui vit dans l'eau' ..."}, 
+    {"nom":"Dragon_terre","theme":"animaux","titre":"Un dragon de terre","description":"Un dragon qui a la puissance de la Terre ..."}, 
+    {"nom":"Dragon_royal","theme":"animaux","titre":"Un dragon dans son royaume","description":"Un dragon qui règne aux pays des dragons ..."}
 ]
