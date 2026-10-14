@@ -17,9 +17,9 @@ if (!is_array($json_data)) {
 $themes = array_merge(['Tous'], array_values(array_unique(array_column($json_data, 'theme'))));
 
 // GET + valeur par défaut + liste blanche
-$themesColo = filter_input(INPUT_GET, 'themesColo', FILTER_UNSAFE_RAW) ?: 'Tout';
+$themesColo = filter_input(INPUT_GET, 'themesColo', FILTER_UNSAFE_RAW) ?: 'Tous';
 if (!in_array($themesColo, $themes, true)) {
-    $themesColo = 'Tout';
+    $themesColo = 'Tous';
 }
 ?>
 
@@ -45,7 +45,7 @@ if (!in_array($themesColo, $themes, true)) {
     <?php endif; ?>
 
     <?php foreach ($json_data as $draw): ?>
-        <?php if ($themesColo === 'Tout' || $draw['theme'] === $themesColo): ?>
+        <?php if ($themesColo === 'Tous' || $draw['theme'] === $themesColo): ?>
             <?php
                 $pdf = $dirPdf . $draw['nom'] . '.pdf';
                 $titre = $draw['titre'] ?? str_replace('_', ' ', $draw['nom']);
