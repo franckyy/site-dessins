@@ -25,10 +25,13 @@ if (!is_array($json_data)) {
             <img class="dessin" loading="lazy"
                  src="<?= htmlspecialchars($dir . $icon['nom'] . '.jpg') ?>"
                  alt="icône du jeu : <?= htmlspecialchars($icon['nom']) ?>">
-            <a class="btnDownload" href="<?= htmlspecialchars($icon['file']) ?>">JOUER</a>
+            <?php if (!empty($icon['file'])): ?>
+                <a class="btnDownload" href="<?= htmlspecialchars($icon['file']) ?>">JOUER</a>
+            <?php endif; ?>
         </div>
     <?php endforeach; ?>
 </div>
 
+</body>
 
 <?php require 'footer.php';?>
