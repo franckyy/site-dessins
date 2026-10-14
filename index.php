@@ -14,7 +14,7 @@ if (!is_array($json_data)) {
 }
 
 // Liste des thèmes construite depuis le JSON, sans doublons
-$themes = array_merge(['Tout'], array_values(array_unique(array_column($json_data, 'theme'))));
+$themes = array_merge(['Tous'], array_values(array_unique(array_column($json_data, 'theme'))));
 
 // GET + valeur par défaut + liste blanche
 $themesColo = filter_input(INPUT_GET, 'themesColo', FILTER_UNSAFE_RAW) ?: 'Tout';
