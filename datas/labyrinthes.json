@@ -5,8 +5,8 @@
     {"nom":"laby_02","solution":"false", "dossier":"02/"}, 
     {"nom":"laby_03_souris","solution":"true", "dossier":"03/"}, 
     {"nom":"laby_03_souris","solution":"false", "dossier":"03/"}, 
-    {"nom":"laby_04","solution":"true", "dossier":"04/"}, 
-    {"nom":"laby_04","solution":"false", "dossier":"04/"}, 
+    {"nom":"laby_04_cheval_fleurs","solution":"true", "dossier":"04/"}, 
+    {"nom":"laby_04_cheval_fleurs","solution":"false", "dossier":"04/"}, 
     {"nom":"laby_05_abeille","solution":"true", "dossier":"05/"}, 
     {"nom":"laby_05_abeille","solution":"false", "dossier":"05/"}
 ]
