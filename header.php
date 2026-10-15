@@ -25,3 +25,4 @@ $pageCourante = $_SERVER['SCRIPT_NAME'];
         <a href="https://www.paypal.com/donate/?hosted_button_id=CUJ2FNRCT3RFE">Faire un don</a>
     </div>
 </header>
+<?php require __DIR__ . '/pub.php'; ?>

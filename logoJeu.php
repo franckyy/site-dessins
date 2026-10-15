@@ -52,3 +52,4 @@ $seuil = $largeurJeu + 160; // en dessous, il n'y a plus la place pour le logo
 </style>
 <a class="logoJeu" href="/index.php" title="Retour à l'accueil"><img src="/assets/Logo_site.gif" alt="Retour à l'accueil"></a>
 <a class="lienAccueilJeu" href="/index.php">&larr; Accueil</a>
+<?php require __DIR__ . '/pub.php'; ?>
