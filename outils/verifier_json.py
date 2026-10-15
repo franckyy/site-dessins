@@ -110,6 +110,9 @@ def verifier_labyrinthes():
         base = f"dessins/labyrinthes/{dossier}{nom}"
         if not existe(f"{base}.jpg"):
             err(src, f"image manquante : {base}.jpg")
+        if not existe(f"dessins/miniatures/labyrinthes/{dossier}{nom}.jpg"):
+            warn(src, f"miniature manquante : dessins/miniatures/labyrinthes/{dossier}{nom}.jpg "
+                      f"(lancer ./outils/generer_miniatures.sh)")
         if not existe(f"{base}.pdf"):
             warn(src, f"PDF manquant : {base}.pdf (le bouton Télécharger n'apparaîtra pas)")
         if not existe(f"{base}_solution.pdf"):

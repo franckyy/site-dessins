@@ -2,6 +2,7 @@
 $title = "Labyrinthes";
 require 'head.php';
 $dir = 'dessins/labyrinthes/';
+$dirMini = 'dessins/miniatures/labyrinthes/';
 
 // Lecture du JSON avec gestion d'erreur
 $json = @file_get_contents('datas/labyrinthes.json');
@@ -25,10 +26,14 @@ if (!is_array($json_data)) {
                 $base = $dir . $draw['dossier'] . $draw['nom'];
                 $pdf = $base . '.pdf';
                 $pdfSolution = $base . '_solution.pdf';
+                $src = $dirMini . $draw['dossier'] . $draw['nom'] . '.jpg';
+                if (!file_exists($src)) {
+                    $src = $base . '.jpg'; // repli si la miniature n'existe pas encore
+                }
             ?>
             <div>
                 <img class="dessin" loading="lazy"
-                     src="<?= htmlspecialchars($base . '.jpg') ?>"
+                     src="<?= htmlspecialchars($src) ?>"
                      alt="labyrinthe : <?= htmlspecialchars($draw['nom']) ?>">
                 <div class="laby-actions">
                     <?php if (file_exists($pdf)): ?>
