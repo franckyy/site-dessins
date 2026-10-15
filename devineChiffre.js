@@ -1,29 +1,65 @@
 let aDeviner = generateChiffreRand();
+let essais = 0;
+let timers = [];
 
 function generateChiffreRand() {
     return Math.floor(Math.random() * 1001); // entre 0 et 1000
 }
 
-function verifyChiffre() {
+// Affiche un message et applique la couleur correspondant à l'état
+function afficher(texte, etat) {
     const zone = document.getElementById("textareaDC");
-    const n = parseInt(document.getElementById("chiffreUser").value, 10);
+    zone.textContent = texte;
+    zone.className = etat ? "etat-" + etat : "";
+}
+
+function majEssais() {
+    document.getElementById("essaisDC").textContent = "Essais : " + essais;
+}
+
+function verifyChiffre() {
+    const champ = document.getElementById("chiffreUser");
+    const n = parseInt(champ.value, 10);
+
+    // On annule les messages programmés après une victoire
+    timers.forEach(clearTimeout);
+    timers = [];
 
     // Saisie vide, texte ou hors limites
     if (isNaN(n) || n < 0 || n > 1000) {
-        zone.textContent = "Entre un nombre entre 0 et 1000";
+        afficher("Entre un nombre entre 0 et 1000", "info");
         return;
     }
 
+    essais++;
+    majEssais();
+
     if (n > aDeviner) {
-        zone.textContent = "chiffre trop grand";
+        afficher("Trop grand ! ▼", "grand");
     } else if (n < aDeviner) {
-        zone.textContent = "chiffre trop petit";
+        afficher("Trop petit ! ▲", "petit");
     } else {
         const trouve = aDeviner;
-        zone.textContent = "Bravo !!!";
+        const nbEssais = essais;
+        afficher("Bravo !!!", "gagne");
         aDeviner = generateChiffreRand();
-        setTimeout(() => { zone.textContent = "Vous avez deviné le chiffre : " + trouve; }, 3000);
-        setTimeout(() => { zone.textContent = "Un nouveau nombre a été généré !"; }, 6000);
-        setTimeout(() => { zone.textContent = ""; }, 9000);
+        essais = 0;
+        timers.push(setTimeout(() => {
+            afficher("Trouvé : " + trouve + " en " + nbEssais + " essai" + (nbEssais > 1 ? "s" : ""), "gagne");
+        }, 3000));
+        timers.push(setTimeout(() => {
+            afficher("Un nouveau nombre a été généré !", "info");
+            majEssais();
+        }, 6000));
+        timers.push(setTimeout(() => { afficher("", ""); }, 9000));
     }
+
+    champ.select();
 }
+
+// Touche Entrée = DEVINER
+document.getElementById("chiffreUser").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        verifyChiffre();
+    }
+});

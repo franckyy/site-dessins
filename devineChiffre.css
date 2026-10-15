@@ -1,45 +1,154 @@
-.champsJeuDC {
-    width: 300px;
-    height: 100px;
-}
+/* ===== Devine le chiffre : palette du site =====
+   Turquoise : 85ECE4 · 55E0D6 · 30D5C9 · 0CC9BB · 00A094
+   Bleu      : 91B0EE · 6590E4 · 4275DB · 205BD0 · 0C42AC
+   Vert      : 95F68B · 6AF05C · 46EB35 · 22E50E · 14D200
+*/
 .containerDC {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: minmax(100px, auto);
-}
-#chiffreUser {
+    --tq1: #85ECE4; --tq2: #55E0D6; --tq3: #30D5C9; --tq4: #0CC9BB; --tq5: #00A094;
+    --bl1: #91B0EE; --bl2: #6590E4; --bl3: #4275DB; --bl4: #205BD0; --bl5: #0C42AC;
+    --vt1: #95F68B; --vt2: #6AF05C; --vt3: #46EB35; --vt4: #22E50E; --vt5: #14D200;
+
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 32px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
     text-align: center;
-    font-size: 2rem;
-    grid-column: 3;
-    grid-row: 2;
-    border-radius: 40px;
-    color: var(--colorTextInput);
-    background-color: var(--colorBackInput);
-}
-#btnDeviner {
-    font-size: 2rem;
-    margin-top: 20px;
-    grid-column: 3;
-    grid-row: 3;
-    font-weight: 700;
-    background-color: var(--colorBackButton);
-    color: var(--colorTextSelectTheme);
-    border-radius: 40px;
+    background: linear-gradient(160deg, var(--tq1) 0%, var(--tq2) 100%);
+    border: 4px solid transparent;
+    border-radius: 28px;
+    /* bordure dégradé bleu -> vert */
+    background-image:
+        linear-gradient(160deg, var(--tq1), var(--tq2)),
+        linear-gradient(135deg, var(--bl4), var(--vt3));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 10px 30px rgba(12, 66, 172, 0.35);
 }
 
-#textareaDC {
-    font-size: 2.1rem;
-    font-weight: 600;
-    margin-top: 20px;
-    background-color: var(--colorBackButton);
-    color: var(--colorTextP);
-    grid-column: 1/5;
-    grid-row: 4;
-    border-radius: 40px;
-    margin-left: 10%;
-    margin-right: 10%;
+.titreDC {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: var(--bl5);
+    text-shadow: 0 2px 0 var(--tq1);
+}
+
+.consigneDC {
+    font-size: 1.1rem;
+    color: var(--bl5);
+}
+
+/* Champ de saisie */
+.champsJeuDC {
+    width: 100%;
+    max-width: 320px;
+}
+#chiffreUser {
+    height: 80px;
     text-align: center;
-    line-height: 220%;
-    border: thick double var(--colorBackInput);
-    height: 90%;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--bl5);
+    background-color: #fff;
+    border: 4px solid var(--bl3);
+    border-radius: 40px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+#chiffreUser::placeholder {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--bl2);
+}
+#chiffreUser:focus {
+    border-color: var(--vt4);
+    box-shadow: 0 0 0 6px rgba(70, 235, 53, 0.35);
+}
+
+/* Bouton */
+#btnDeviner {
+    height: 70px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--bl4), var(--bl3));
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 var(--bl5);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+}
+#btnDeviner:hover {
+    background: linear-gradient(135deg, var(--vt5), var(--vt3));
+    color: var(--bl5);
+    box-shadow: 0 6px 0 var(--tq5);
+}
+#btnDeviner:active {
+    transform: translateY(5px);
+    box-shadow: 0 1px 0 var(--tq5);
+}
+#btnDeviner:focus-visible {
+    outline: 4px solid var(--vt4);
+    outline-offset: 3px;
+}
+
+/* Zone de message */
+#textareaDC {
+    width: 100%;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--bl5);
+    background-color: rgba(255, 255, 255, 0.55);
+    border: 3px dashed var(--tq5);
+    border-radius: 24px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+#textareaDC.etat-grand {
+    background-color: var(--bl4);
+    color: #fff;
+    border: 3px solid var(--bl5);
+}
+#textareaDC.etat-petit {
+    background-color: var(--tq5);
+    color: #fff;
+    border: 3px solid var(--tq4);
+}
+#textareaDC.etat-gagne {
+    background-color: var(--vt1);
+    color: var(--bl5);
+    border: 3px solid var(--vt5);
+    animation: pulseDC 0.6s ease-in-out 3;
+}
+#textareaDC.etat-info {
+    background-color: var(--bl1);
+    color: var(--bl5);
+    border: 3px solid var(--bl3);
+}
+
+#essaisDC {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--bl5);
+}
+
+@keyframes pulseDC {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+
+/* Petits écrans */
+@media screen and (max-width: 560px) {
+    .containerDC { margin: 20px 10px; padding: 24px 16px; }
+    .titreDC { font-size: 1.7rem; }
+    #textareaDC { font-size: 1.3rem; }
 }
