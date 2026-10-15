@@ -7,9 +7,15 @@ a {
     letter-spacing: 2px;
     text-transform: uppercase;
 }
-#logoImg{
+/* Le logo est dans un lien : la largeur est donnée au lien, l'image la remplit */
+.logoLien {
+    display: block;
     width: 20%;
-    height: 20%;
+}
+#logoImg{
+    display: block;
+    width: 100%;
+    height: auto;
 }
 ul {
     list-style-type: none;

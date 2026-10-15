@@ -10,6 +10,8 @@
     </head>
 
     <body>
+        <?php $largeurJeu = 1034; require __DIR__ . '/../logoJeu.php'; ?>
+
         <h1 class="titre">CASSE-BRIQUES</h1>
 
         <canvas id="myCanvas" width="1024" height="640"></canvas>

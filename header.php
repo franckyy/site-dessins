@@ -8,7 +8,9 @@ $pagesMenu = [
 $pageCourante = $_SERVER['SCRIPT_NAME'];
 ?>
 <header>
-    <img id="logoImg" src="assets/Logo_site.gif" alt="logo">
+    <a class="logoLien" href="/index.php" title="Retour à l'accueil">
+        <img id="logoImg" src="assets/Logo_site.gif" alt="Retour à l'accueil">
+    </a>
 
     <ul class="header__menu">
         <?php foreach ($pagesMenu as $url => $libelle): ?>

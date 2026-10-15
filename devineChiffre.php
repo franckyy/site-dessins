@@ -5,8 +5,9 @@ require 'head.php';
 
 <body>
 
-<?php require 'header.php';?>
+<?php $largeurJeu = 520; require 'logoJeu.php'; ?>
 
+<div class="pageDC">
 <main class="containerDC">
     <h2 class="titreDC">Devine le chiffre</h2>
     <p class="consigneDC">J'ai choisi un nombre entre 0 et 1000. À toi de le trouver !</p>
@@ -18,6 +19,7 @@ require 'head.php';
     <p id="textareaDC" role="status" aria-live="polite"></p>
     <p id="essaisDC">Essais : 0</p>
 </main>
+</div>
 
 <script src="./devineChiffre.js"></script>
 </body>
