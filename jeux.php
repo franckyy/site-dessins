@@ -13,7 +13,6 @@ if (!is_array($json_data)) {
 ?>
 <body>
 <?php require 'header.php';?>
-<h3>Jeux</h3>
 
 <div class="grid-wrapper">
     <?php if (!empty($erreurJson)): ?>
