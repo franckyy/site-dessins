@@ -1,6 +1,18 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-const ballRadius = 4;
+const ballRadius = 6;
+
+// ===== Palette du site =====
+// Couleur d'une brique selon le nombre de coups restants pour la casser :
+// 1 coup = vert, 2 coups = turquoise, 3 coups (ou plus) = bleu
+const COULEURS_BRIQUES = {
+    1: { haut: "#95F68B", face: "#46EB35", bas: "#14D200" },
+    2: { haut: "#85ECE4", face: "#30D5C9", bas: "#00A094" },
+    3: { haut: "#91B0EE", face: "#6590E4", bas: "#205BD0" }
+};
+const COULEUR_TEXTE = "#FFFFFF";
+const COULEUR_BALLE = "#FFFFFF";
+const COULEUR_HALO = "#85ECE4";
 
 let x = canvas.width / 2;
 let dx = 2;
@@ -26,8 +38,14 @@ const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 
+// Nombre de coups nécessaires pour casser les briques de chaque ligne
+// (de haut en bas). Pour revenir à l'ancien jeu : [2, 2, 2]
+const resistanceParLigne = [3, 2, 1];
+
 let score = 0;
-let lives = 3;
+const viesMax = 3;
+let lives = viesMax;
+let briquesRestantes = brickRowCount * brickColumnCount;
 
 //tableau contenant les colonnes et les lignes de briques
 let bricks = [];
@@ -35,35 +53,73 @@ for(let c = 0; c < brickColumnCount; c++){
     bricks[c] = [];
     for(let r = 0; r < brickRowCount; r++){
         //status est le nombre de fois où il faut toucher la brique pour la détruire
-        bricks[c][r] = {x:0, y:0, status: 2};
+        bricks[c][r] = {x:0, y:0, status: resistanceParLigne[r] || 1};
     }
 }
 
+// Rectangle aux coins arrondis
+function rectArrondi(rx, ry, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(rx + r, ry);
+    ctx.arcTo(rx + w, ry, rx + w, ry + h, r);
+    ctx.arcTo(rx + w, ry + h, rx, ry + h, r);
+    ctx.arcTo(rx, ry + h, rx, ry, r);
+    ctx.arcTo(rx, ry, rx + w, ry, r);
+    ctx.closePath();
+}
+
 function drawLives(){
-    ctx.font = "16px arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Lives : " + lives, canvas.width - 65, 20);
+    const espace = 22;
+    const cy = 15;
+    ctx.font = "bold 16px Roboto, Arial, sans-serif";
+    ctx.fillStyle = COULEUR_TEXTE;
+    ctx.textAlign = "right";
+    ctx.fillText("Vies", canvas.width - 20 - (viesMax - 1) * espace - 18, 20);
+    ctx.textAlign = "left";
+    for(let i = 0; i < viesMax; i++){
+        const cx = canvas.width - 20 - (viesMax - 1 - i) * espace;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 7, 0, Math.PI * 2);
+        if(i < lives){
+            ctx.fillStyle = "#46EB35";
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#95F68B";
+        } else {
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "rgba(255,255,255,0.35)";
+        }
+        ctx.stroke();
+        ctx.closePath();
+    }
 }
 
 function drawScore(){
-    ctx.font = "16px arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score : " + score, 8, 20);
+    ctx.font = "bold 16px Roboto, Arial, sans-serif";
+    ctx.fillStyle = COULEUR_TEXTE;
+    ctx.textAlign = "left";
+    ctx.fillText("Score : " + score, 20, 20);
 }
 
 function drawBricks() {
     for(let c = 0; c < brickColumnCount; c++){
         for(let r = 0; r < brickRowCount; r++){
-            if(bricks[c][r].status >= 1){
-                const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
-                const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
-                bricks[c][r].x = brickX;
-                bricks[c][r].y = brickY;
-                ctx.beginPath();
-                ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "#0095DD";
+            const b = bricks[c][r];
+            // la position est toujours calculée : la détection des collisions s'en sert
+            b.x = c * (brickWidth + brickPadding) + brickOffsetLeft;
+            b.y = r * (brickHeight + brickPadding) + brickOffsetTop;
+            if(b.status >= 1){
+                const couleur = COULEURS_BRIQUES[Math.min(b.status, 3)];
+                const degrade = ctx.createLinearGradient(0, b.y, 0, b.y + brickHeight);
+                degrade.addColorStop(0, couleur.haut);
+                degrade.addColorStop(0.5, couleur.face);
+                degrade.addColorStop(1, couleur.bas);
+                rectArrondi(b.x, b.y, brickWidth, brickHeight, 4);
+                ctx.fillStyle = degrade;
                 ctx.fill();
-                ctx.closePath();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = couleur.bas;
+                ctx.stroke();
             }
         }
     }
@@ -72,17 +128,25 @@ function drawBricks() {
 function drawBall(){
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "#0095DD";
+    ctx.shadowColor = COULEUR_HALO;
+    ctx.shadowBlur = 14;
+    ctx.fillStyle = COULEUR_BALLE;
     ctx.fill();
+    ctx.shadowBlur = 0;
     ctx.closePath();
 }
 
 function drawPaddle(){
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
+    const py = canvas.height - paddleHeight;
+    const degrade = ctx.createLinearGradient(0, py, 0, py + paddleHeight);
+    degrade.addColorStop(0, "#95F68B");
+    degrade.addColorStop(1, "#14D200");
+    rectArrondi(paddleX, py, paddleWidth, paddleHeight, 5);
+    ctx.fillStyle = degrade;
     ctx.fill();
-    ctx.closePath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#85ECE4";
+    ctx.stroke();
 }
 
 function draw(){
@@ -110,7 +174,7 @@ function draw(){
                 document.location.reload();
                 clearInterval(interval);
             } else {
-                w = canvas.width / 2;
+                x = canvas.width / 2;
                 y = canvas.height - 30;
                 dx = 2;
                 dy = -2;
@@ -157,9 +221,16 @@ function keyUpHandler(e){
 }
 
 function mouseMoveHandler(e){
-    let relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX < 0 && relativeX < canvas.width){
+    // position de la souris dans le canvas (tient compte d'un éventuel redimensionnement CSS)
+    const rect = canvas.getBoundingClientRect();
+    const relativeX = (e.clientX - rect.left) * canvas.width / rect.width;
+    if(relativeX > 0 && relativeX < canvas.width){
         paddleX = relativeX - paddleWidth / 2;
+        if(paddleX < 0){
+            paddleX = 0;
+        } else if(paddleX + paddleWidth > canvas.width){
+            paddleX = canvas.width - paddleWidth;
+        }
     }
 }
 
@@ -174,11 +245,12 @@ function collisionDetection(){
                     //mise à jour du score
                     if(b.status < 1){
                         score = score + 10;
+                        briquesRestantes--;
                     } else {
                         score++;
                     }
-                    //fin du jeu
-                    if(score == brickRowCount * brickColumnCount * 11 ){
+                    //fin du jeu : plus aucune brique
+                    if(briquesRestantes === 0){
                         alert("Bravo ! c'est gagné !");
                         document.location.reload();
                         clearInterval(interval);
