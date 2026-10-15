@@ -29,14 +29,14 @@ if (!in_array($themesColo, $themes, true)) {
 
 <form class="selectColo" action="index.php" method="get">
     <label for="themesColo">Choisissez un thème de coloriage : </label>
-    <select name="themesColo" id="themesColo">
+    <select name="themesColo" id="themesColo" onchange="this.form.submit()">
         <?php foreach ($themes as $theme): ?>
             <option value="<?= htmlspecialchars($theme) ?>" <?= $theme === $themesColo ? 'selected' : '' ?>>
                 <?= htmlspecialchars($theme) ?>
             </option>
         <?php endforeach; ?>
     </select>
-    <button type="submit">Select</button>
+    <noscript><button type="submit">Select</button></noscript>
 </form>
 
 <div class="grid-wrapper">
