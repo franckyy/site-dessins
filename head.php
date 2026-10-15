@@ -7,7 +7,7 @@
     <?php if (!empty($metaDescription)): ?>
     <meta name="description" content="<?= htmlspecialchars($metaDescription) ?>">
     <?php endif; ?>
-    <link rel="icon" href="./assets/Logo_site_02.gif">
+    <link rel="icon" href="./assets/Logo_site.gif">
 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./header.css">
