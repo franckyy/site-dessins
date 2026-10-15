@@ -17,5 +17,6 @@
     {"nom":"Dragon_ombre","theme":"animaux","titre":"Un dragon de l'ombre'","description":"Un dragon qui disparait dans l'ombre'..."}, 
     {"nom":"Dragon_eau","theme":"animaux","titre":"Un dragon de l'eau'","description":"Un dragon qui vit dans l'eau' ..."}, 
     {"nom":"Dragon_terre","theme":"animaux","titre":"Un dragon de terre","description":"Un dragon qui a la puissance de la Terre ..."}, 
-    {"nom":"Dragon_royal","theme":"animaux","titre":"Un dragon dans son royaume","description":"Un dragon qui règne aux pays des dragons ..."}
+    {"nom":"Dragon_royal","theme":"animaux","titre":"Un dragon dans son royaume","description":"Un dragon qui règne aux pays des dragons ..."}, 
+    {"nom":"Dragon_sentinelle","theme":"animaux","titre":"Un dragon sentinelle","description":"Un dragon qui surveille le royaume"}
 ]
