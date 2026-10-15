@@ -3,10 +3,13 @@
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;            /* sur petit écran, le menu passe sous le label */
+    justify-content: center;    /* centre les deux champs */
+    align-items: center;
+    gap: 15px;
     width: 100%;
-    overflow:hidden;
-    grid-template-columns: 3fr 2fr;
+    overflow: hidden;
 }
 .selectColo > label {
     font-size: 20px;
@@ -15,11 +18,11 @@
     padding: 0px 10px 0px 10px;
     background-color: var(--colorBackSelectTheme);
     color: var(--colorTextSelectTheme);
-    margin-right: 30px;
 }
 .selectColo > select {
     font-size: 20px;
-    width: 100%;
+    width: 220px;
+    max-width: 100%;
     border-radius: 10px;
     text-align-last:right;
     padding-right: 10px;
