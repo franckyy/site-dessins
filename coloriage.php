@@ -58,15 +58,19 @@ require 'head.php';
 <main class="fiche-coloriage">
     <h1>Coloriage <?= htmlspecialchars($titre) ?></h1>
 
-    <img src="<?= htmlspecialchars($image) ?>"
-         alt="Coloriage <?= htmlspecialchars($titre) ?> à imprimer"
-         <?php if ($taille): ?>width="<?= (int)$taille[0] ?>" height="<?= (int)$taille[1] ?>"<?php endif; ?>>
+    <div class="fiche-image">
+        <img src="<?= htmlspecialchars($image) ?>"
+             alt="Coloriage <?= htmlspecialchars($titre) ?> à imprimer"
+             <?php if ($taille): ?>width="<?= (int)$taille[0] ?>" height="<?= (int)$taille[1] ?>"<?php endif; ?>>
+
+        <?php if (file_exists($pdf)): ?>
+            <a class="btnTelecharger" href="<?= htmlspecialchars($pdf) ?>" download>Télécharger (PDF)</a>
+        <?php endif; ?>
+    </div>
 
     <p class="fiche-description"><?= htmlspecialchars($description) ?></p>
 
-    <?php if (file_exists($pdf)): ?>
-        <a class="btnTelecharger" href="<?= htmlspecialchars($pdf) ?>" download>Télécharger le coloriage (PDF)</a>
-    <?php else: ?>
+    <?php if (!file_exists($pdf)): ?>
         <p class="fiche-description">Le PDF de ce coloriage sera bientôt disponible.</p>
     <?php endif; ?>
 

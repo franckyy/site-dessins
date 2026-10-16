@@ -1,18 +1,30 @@
 /* Page d'un coloriage */
 .fiche-coloriage {
+    /* place prise au-dessus du dessin : en-tête fixe + titre + marges.
+       Le dessin occupe toute la hauteur restante de l'écran : à ajuster si besoin. */
+    --reservePage: 260px;
     max-width: 900px;
-    margin: 20px auto;
+    margin: 15px auto 20px;
     padding: 0 15px;
     text-align: center;
 }
 .fiche-coloriage h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: var(--colorTextP);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+}
+/* Le dessin tient en entier dans l'écran (jamais plus haut que la fenêtre moins la réserve),
+   sans déformation. Le bouton Télécharger est posé sur le dessin : toujours visible avec lui. */
+.fiche-image {
+    position: relative;
 }
 .fiche-coloriage img {
-    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    width: auto;
     height: auto;
+    max-width: 100%;
+    max-height: max(300px, calc(100vh - var(--reservePage)));
     background: #fff;
     border: thick double var(--colorBorder);
     border-radius: 10px;
@@ -35,14 +47,22 @@
     text-decoration: underline;
 }
 .fiche-coloriage a.btnTelecharger {
-    display: inline-block;
-    font-size: 20px;
+    /* posé en bas du dessin, centré (le dessin est lui-même centré dans .fiche-image) */
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 90%;
+    font-size: 18px;
     font-weight: 700;
-    padding: 14px 30px;
+    padding: 12px 26px;
     border-radius: 40px;
     text-decoration: none;
+    white-space: nowrap;
     background-color: var(--colorBackButton);
     color: var(--colorTextSelectTheme);
+    border: 2px solid var(--colorTextSelectTheme);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
 }
 .fiche-coloriage a.btnTelecharger:hover {
     filter: brightness(0.92);
