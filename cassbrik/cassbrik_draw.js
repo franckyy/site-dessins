@@ -64,6 +64,28 @@ function positionnerBalleCollee(){
     y = canvas.height - paddleHeight - ballRadius;
 }
 
+// ===== Rebond sur la plateforme =====
+// L'endroit touché modifie l'angle de sortie de la balle (cercle trigonométrique) :
+//   bord gauche -> + INFLUENCE_PLATEFORME degrés, bord droit -> - INFLUENCE_PLATEFORME degrés,
+//   milieu -> aucun changement, variation linéaire entre les deux.
+// L'angle final est toujours maintenu entre ANGLE_MIN_REBOND et ANGLE_MAX_REBOND.
+const INFLUENCE_PLATEFORME = 20;   // degrés
+const ANGLE_MIN_REBOND = 20;       // degrés
+const ANGLE_MAX_REBOND = 160;      // degrés
+
+function rebondSurPlateforme(){
+    const vitesse = Math.hypot(dx, dy);
+    // angle avec lequel la balle repart vers le haut (avant l'influence de la plateforme)
+    let angle = Math.atan2(Math.abs(dy), dx) * 180 / Math.PI;
+    // 0 = bord gauche de la plateforme, 1 = bord droit
+    const t = Math.min(1, Math.max(0, (x - paddleX) / paddleWidth));
+    angle += INFLUENCE_PLATEFORME * (1 - 2 * t);
+    angle = Math.min(ANGLE_MAX_REBOND, Math.max(ANGLE_MIN_REBOND, angle));
+    const rad = angle * Math.PI / 180;
+    dx = vitesse * Math.cos(rad);
+    dy = -vitesse * Math.sin(rad);
+}
+
 function drawConsigne(){
     ctx.font = "bold 20px Roboto, Arial, sans-serif";
     ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
@@ -223,7 +245,7 @@ function draw(){
             dy = -dy;
         } else if(y + dy > canvas.height - ballRadius - paddleHeight){
             if(x > paddleX - paddleXoffset && x < paddleX + paddleWidth + paddleXoffset){
-                dy = -dy;
+                rebondSurPlateforme();
             }else{
                 lives--;
                 if(!lives){
