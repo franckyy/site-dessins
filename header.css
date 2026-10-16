@@ -35,7 +35,11 @@ header {
     padding: 20px 0;
     border-bottom: 2px solid #000;
     background-color: var(--colorBackLogo);
-
+    /* En-tête toujours visible quand on fait défiler la page.
+       z-index : au-dessus du contenu (images, boutons), mais sous le bandeau pub (z-index 5). */
+    position: sticky;
+    top: 0;
+    z-index: 4;
 }
 .header__menu {
     display: flex;
