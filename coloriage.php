@@ -53,7 +53,7 @@ require 'head.php';
 ?>
 <body>
 
-<?php require 'header.php'; ?>
+<?php $pubDeuxCotes = true; require 'header.php'; ?>
 
 <main class="fiche-coloriage">
     <h1>Coloriage <?= htmlspecialchars($titre) ?></h1>

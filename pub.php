@@ -3,6 +3,9 @@
 // - Pages avec en-tête (header.php) : le contenu est décalé pour libérer la place du bandeau.
 // - Pages de jeu (logoJeu.php) : le jeu reste centré ; le bandeau n'apparaît que si l'écran
 //   est assez large pour garder l'écart voulu entre le jeu et la publicité.
+// - Page avec deux bandeaux (à gauche et à droite, contenu centré sur l'écran) : la page met
+//   $pubDeuxCotes = true; juste avant require 'header.php'. Le bandeau de gauche n'apparaît que si
+//   l'écran est assez large ($seuilDeuxCotes) ; en dessous, seul le bandeau de droite reste.
 // Pour l'instant c'est une maquette. Le jour où AdSense est prêt : remplacer le contenu de
 // la div "pubEmplacement" par le code fourni par Google.
 $pubVisible = true;     // false = aucun bandeau et aucun espace réservé
@@ -14,6 +17,10 @@ if ($pubVisible):
     $margeBord  = 10;   // px entre la publicité et le bord de l'écran
     $reserve    = $largeurPub + $ecartPub + $margeBord;   // place prise à droite
     $jeu        = isset($largeurJeu);                      // vrai sur une page de jeu
+    $deuxCotes  = !$jeu && !empty($pubDeuxCotes);          // vrai si la page veut un bandeau de chaque côté
+    $seuilDeuxCotes = 1500;   // px : largeur d'écran minimale pour afficher le bandeau de gauche
+    // à gauche, l'en-tête garde juste la place du bandeau (le logo ne doit pas passer dessous)
+    $reserveEntete  = $largeurPub + $margeBord + 10;
     // en dessous de cette largeur d'écran, il n'y a plus la place : on masque le bandeau
     $seuilLargeur = $jeu ? ((int) $largeurJeu + 2 * $reserve + 20) : 1100;
     $seuilHauteur = $hauteurPub + 40;
@@ -64,6 +71,21 @@ if ($pubVisible):
     .grid-wrapper { margin-right: 0; }
 }
 <?php endif; ?>
+<?php if ($deuxCotes): ?>
+/* Bandeau de gauche : symétrique de celui de droite, le contenu reste centré sur l'écran.
+   Même écart (151 px) entre le contenu et chaque bandeau. */
+.pubGauche {
+    right: auto;
+    left: <?= $margeBord ?>px;
+}
+@media (min-width: <?= $seuilDeuxCotes ?>px) and (min-height: <?= $hauteurMini ?>px) {
+    body { padding-left: <?= $reserve ?>px; }
+    header { margin-left: -<?= $reserve ?>px; padding-left: <?= $reserveEntete ?>px; }
+}
+@media (max-width: <?= $seuilDeuxCotes - 1 ?>px) {
+    .pubGauche { display: none; }
+}
+<?php endif; ?>
 @media (max-width: <?= $seuilLargeur ?>px), (max-height: <?= $seuilHauteur ?>px) {
     .pubLateral { display: none; }
 }
@@ -78,4 +100,13 @@ if ($pubVisible):
         <?= $largeurPub ?> &times; <?= $hauteurPub ?>
     </div>
 </aside>
+<?php if ($deuxCotes): ?>
+<aside class="pubLateral pubGauche" aria-label="Publicité">
+    <span class="pubEtiquette">Publicité</span>
+    <div class="pubEmplacement">
+        <!-- Code AdSense à coller ici (bandeau de gauche) -->
+        <?= $largeurPub ?> &times; <?= $hauteurPub ?>
+    </div>
+</aside>
+<?php endif; ?>
 <?php endif; ?>
