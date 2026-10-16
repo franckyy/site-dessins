@@ -14,15 +14,63 @@ const COULEUR_TEXTE = "#FFFFFF";
 const COULEUR_BALLE = "#FFFFFF";
 const COULEUR_HALO = "#85ECE4";
 
-let x = canvas.width / 2;
-let dx = 2;
-let y = canvas.height - 30;
-let dy = -6;
-
 const paddleHeight = 10;
 var paddleWidth = 100;
 let paddleX = (canvas.width - paddleWidth) / 2;
 const paddleXoffset = 5;
+
+// ===== Lancement de la balle =====
+// Au départ et après chaque vie perdue, la balle est collée sur la plateforme.
+// La touche ESPACE la libère, avec un angle qui dépend de la position de la plateforme.
+// Angles mesurés sur le cercle trigonométrique (0° = vers la droite, 90° = tout droit vers le haut) :
+//   plateforme tout à droite  -> ANGLE_EXTREME (20°)
+//   plateforme tout à gauche  -> 180° - ANGLE_EXTREME (160°)
+//   entre les deux            -> variation linéaire (milieu = 90°, tout droit)
+const ANGLE_EXTREME = 20;       // degrés
+const VITESSE_BALLE = 6.3;      // px par image (identique à la vitesse du début : racine de 2² + 6²)
+let balleCollee = true;
+let x = canvas.width / 2;
+let y = canvas.height - paddleHeight - ballRadius;
+let dx = 0;
+let dy = 0;
+
+// angle de lancement (en radians) selon la position horizontale de la plateforme
+function angleLancement(){
+    const course = canvas.width - paddleWidth;
+    const t = course > 0 ? paddleX / course : 0.5;   // 0 = tout à gauche, 1 = tout à droite
+    const degres = (180 - ANGLE_EXTREME) + t * (2 * ANGLE_EXTREME - 180);
+    return degres * Math.PI / 180;
+}
+
+function lancerBalle(){
+    if(!balleCollee){
+        return;
+    }
+    const angle = angleLancement();
+    dx = VITESSE_BALLE * Math.cos(angle);
+    dy = -VITESSE_BALLE * Math.sin(angle);
+    balleCollee = false;
+}
+
+function recollerBalle(){
+    balleCollee = true;
+    dx = 0;
+    dy = 0;
+}
+
+// la balle suit la plateforme : centrée dessus, posée sur son bord supérieur
+function positionnerBalleCollee(){
+    x = paddleX + paddleWidth / 2;
+    y = canvas.height - paddleHeight - ballRadius;
+}
+
+function drawConsigne(){
+    ctx.font = "bold 20px Roboto, Arial, sans-serif";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+    ctx.textAlign = "center";
+    ctx.fillText("Appuie sur ESPACE pour lancer la balle", canvas.width / 2, canvas.height * 0.62);
+    ctx.textAlign = "left";
+}
 
 let rightPressed = false;
 let leftPressed = false;
@@ -150,37 +198,45 @@ function drawPaddle(){
 }
 
 function draw(){
+    if(balleCollee){
+        positionnerBalleCollee();
+    }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks();
     drawBall();
     drawPaddle();
-    collisionDetection();
+    if(!balleCollee){
+        collisionDetection();
+    }
     drawScore();
     drawLives();
-
-    if(x + dx < ballRadius || x + dx > canvas.width - ballRadius){
-        dx = -dx;
+    if(balleCollee){
+        drawConsigne();
     }
 
-    if(y + dy < ballRadius){
-        dy = -dy;
-    } else if(y + dy > canvas.height - ballRadius - paddleHeight){
-        if(x > paddleX - paddleXoffset && x < paddleX + paddleWidth + paddleXoffset){
-            dy = -dy;
-        }else{
-            lives--;
-            if(!lives){
-                alert("GAME OVER");
-                document.location.reload();
-                clearInterval(interval);
-            } else {
-                x = canvas.width / 2;
-                y = canvas.height - 30;
-                dx = 2;
-                dy = -2;
-                paddleX = (canvas.width - paddleWidth) /2;
-            }
+    if(!balleCollee){
+        if(x + dx < ballRadius || x + dx > canvas.width - ballRadius){
+            dx = -dx;
+        }
 
+        if(y + dy < ballRadius){
+            dy = -dy;
+        } else if(y + dy > canvas.height - ballRadius - paddleHeight){
+            if(x > paddleX - paddleXoffset && x < paddleX + paddleWidth + paddleXoffset){
+                dy = -dy;
+            }else{
+                lives--;
+                if(!lives){
+                    alert("GAME OVER");
+                    document.location.reload();
+                    clearInterval(interval);
+                } else {
+                    // nouvelle vie : plateforme au centre, balle collée dessus
+                    paddleX = (canvas.width - paddleWidth) / 2;
+                    recollerBalle();
+                    positionnerBalleCollee();
+                }
+            }
         }
     }
 
@@ -196,8 +252,10 @@ function draw(){
         }
     }
 
-    x += dx;
-    y += dy;
+    if(!balleCollee){
+        x += dx;
+        y += dy;
+    }
 }
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -209,6 +267,9 @@ function keyDownHandler(e){
         rightPressed = true;
     } else if (e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = true;
+    } else if (e.code == "Space" || e.key == " " || e.key == "Spacebar") {
+        e.preventDefault();   // évite que la page défile
+        lancerBalle();
     }
 }
 
