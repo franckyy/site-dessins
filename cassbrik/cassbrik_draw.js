@@ -208,9 +208,11 @@ function drawBall(){
 
 function drawPaddle(){
     const py = canvas.height - paddleHeight;
-    const degrade = ctx.createLinearGradient(0, py, 0, py + paddleHeight);
+    // dégradé horizontal : extrémités vert clair (95F68B), centre vert foncé (14D200)
+    const degrade = ctx.createLinearGradient(paddleX, 0, paddleX + paddleWidth, 0);
     degrade.addColorStop(0, "#95F68B");
-    degrade.addColorStop(1, "#14D200");
+    degrade.addColorStop(0.5, "#14D200");
+    degrade.addColorStop(1, "#95F68B");
     rectArrondi(paddleX, py, paddleWidth, paddleHeight, 5);
     ctx.fillStyle = degrade;
     ctx.fill();

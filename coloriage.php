@@ -56,7 +56,7 @@ require 'head.php';
 <?php $pubDeuxCotes = true; require 'header.php'; ?>
 
 <main class="fiche-coloriage">
-    <h1>Coloriage <?= htmlspecialchars($titre) ?></h1>
+    <h1><?= htmlspecialchars($titre) ?></h1>
 
     <div class="fiche-image">
         <img src="<?= htmlspecialchars($image) ?>"
