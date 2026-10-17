@@ -41,6 +41,7 @@ let vitesse = VITESSE_DEPART;
 // change la vitesse de la balle sans changer sa direction
 function fixerVitesse(v){
     vitesse = Math.min(v, VITESSE_MAX);
+    noterVitesse();
     const norme = Math.hypot(dx, dy);
     if(norme > 0){
         dx = dx / norme * vitesse;
@@ -69,6 +70,7 @@ function lancerBalle(){
     dx = vitesse * Math.cos(angle);
     dy = -vitesse * Math.sin(angle);
     balleCollee = false;
+    noterVitesse();
 }
 
 function recollerBalle(){
@@ -110,6 +112,7 @@ function drawConsigne(){
     ctx.font = "bold 20px Roboto, Arial, sans-serif";
     ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
     ctx.textAlign = "center";
+    ctx.fillText("Niveau " + (niveau + 1), canvas.width / 2, canvas.height * 0.55);
     ctx.fillText("Appuie sur ESPACE pour lancer la balle", canvas.width / 2, canvas.height * 0.62);
     ctx.textAlign = "left";
 }
@@ -120,7 +123,7 @@ let leftPressed = false;
 var interval = setInterval(draw, PERIODE_MS);
 
 //on peut mettre 16 briques de 50 px de large sur une ligne
-const brickRowCount = 3;
+let brickRowCount = 0;           // fixé par chargerNiveau() selon la grille du niveau
 const brickColumnCount = 16;
 const brickWidth = 50;
 const brickHeight = 15;
@@ -128,23 +131,115 @@ const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 
-// Nombre de coups nécessaires pour casser les briques de chaque ligne
-// (de haut en bas). Pour revenir à l'ancien jeu : [2, 2, 2]
-const resistanceParLigne = [3, 2, 1];
+// ===== Niveaux =====
+// Une grille par niveau : une chaîne par rangée (de haut en bas), un caractère par colonne
+// (16 colonnes au maximum). Chiffre = nombre de coups pour casser la brique :
+//   0 = pas de brique, 1 = 1 coup, 2 = 2 coups, 3 = 3 coups
+// Pour ajouter un niveau : ajouter une grille à la fin de la liste.
+const NIVEAUX = [
+    // Niveau 1 : trois rangées pleines, surtout des briques à 1 coup
+    [ "2222222222222222",
+      "1111111111111111",
+      "1111111111111111" ],
+    // Niveau 2 : pyramide
+    [ "0000001111000000",
+      "0000011221100000",
+      "0000112222110000",
+      "0001122222211000",
+      "0011222222221100" ],
+    // Niveau 3 : damier
+    [ "1212121212121212",
+      "2121212121212121",
+      "1212121212121212",
+      "2121212121212121" ],
+    // Niveau 4 : colonnes
+    [ "2020202020202020",
+      "2020202020202020",
+      "2020202020202020",
+      "2020202020202020",
+      "3333333333333333" ],
+    // Niveau 5 : dôme avec un creux
+    [ "0011111111111100",
+      "0112222222222110",
+      "1122333333332211",
+      "1122330000332211",
+      "1122000000002211" ],
+    // Niveau 6 : mur final
+    [ "3333333333333333",
+      "2222222222222222",
+      "3322332233223322",
+      "2323232323232323",
+      "3333333333333333",
+      "1111111111111111" ]
+];
 
+let niveau = 0;                 // index dans NIVEAUX (0 = niveau 1)
 let score = 0;
 const viesMax = 3;
 let lives = viesMax;
-let briquesRestantes = brickRowCount * brickColumnCount;
+let briquesRestantes = 0;
+let bricks = [];                // bricks[colonne][rangée] = {x, y, status}
 
-//tableau contenant les colonnes et les lignes de briques
-let bricks = [];
-for(let c = 0; c < brickColumnCount; c++){
-    bricks[c] = [];
-    for(let r = 0; r < brickRowCount; r++){
-        //status est le nombre de fois où il faut toucher la brique pour la détruire
-        bricks[c][r] = {x:0, y:0, status: resistanceParLigne[r] || 1};
+// ===== Records de la session =====
+// Stockés dans sessionStorage : ils survivent au rechargement de la page (game over)
+// et disparaissent à la fermeture de l'onglet.
+function lireSession(cle){
+    try { return Number(sessionStorage.getItem(cle)) || 0; } catch(e) { return 0; }
+}
+function ecrireSession(cle, valeur){
+    try { sessionStorage.setItem(cle, String(valeur)); } catch(e) { /* stockage indisponible : on continue sans */ }
+}
+let meilleurScore = lireSession("cassbrik_meilleurScore");
+let vitesseMaxSession = lireSession("cassbrik_vitesseMax");   // en px par image
+
+function ajouterScore(points){
+    score += points;
+    if(score > meilleurScore){
+        meilleurScore = score;
+        ecrireSession("cassbrik_meilleurScore", meilleurScore);
     }
+}
+
+function noterVitesse(){
+    if(vitesse > vitesseMaxSession){
+        vitesseMaxSession = vitesse;
+        ecrireSession("cassbrik_vitesseMax", vitesseMaxSession);
+    }
+}
+
+// construit le tableau de briques du niveau n (0 = niveau 1)
+function chargerNiveau(n){
+    const grille = NIVEAUX[n];
+    brickRowCount = grille.length;
+    briquesRestantes = 0;
+    bricks = [];
+    for(let c = 0; c < brickColumnCount; c++){
+        bricks[c] = [];
+        for(let r = 0; r < brickRowCount; r++){
+            //status est le nombre de fois où il faut toucher la brique pour la détruire
+            const status = Number(grille[r].charAt(c)) || 0;
+            bricks[c][r] = {x:0, y:0, status: status};
+            if(status >= 1){
+                briquesRestantes++;
+            }
+        }
+    }
+}
+chargerNiveau(niveau);
+
+// toutes les briques sont détruites : niveau suivant, ou victoire après le dernier
+function niveauTermine(){
+    niveau++;
+    if(niveau >= NIVEAUX.length){
+        alert("Bravo ! Tu as terminé les " + NIVEAUX.length + " niveaux ! Score : " + score);
+        document.location.reload();
+        clearInterval(interval);
+        return;
+    }
+    chargerNiveau(niveau);
+    paddleX = (canvas.width - paddleWidth) / 2;
+    recollerBalle();                // balle sur la plateforme, vitesse de départ
+    positionnerBalleCollee();
 }
 
 // Rectangle aux coins arrondis
@@ -186,18 +281,33 @@ function drawLives(){
 
 function drawScore(){
     ctx.font = "bold 16px Roboto, Arial, sans-serif";
-    ctx.fillStyle = COULEUR_TEXTE;
     ctx.textAlign = "left";
+    ctx.fillStyle = COULEUR_TEXTE;
     ctx.fillText("Score : " + score, 20, 20);
+    // meilleur score de la session, juste à droite du score (position fixe)
+    ctx.fillStyle = COULEUR_HALO;
+    ctx.fillText("Meilleur : " + meilleurScore, 150, 20);
 }
 
-// vitesse de la balle, en haut au centre de la zone de jeu
+// vitesse de la balle (en px/s) et vitesse maximale de la session, en haut au centre
 function drawSpeed(){
     const pxParSeconde = Math.round(vitesse * IMAGES_PAR_SECONDE);
+    const maxPxParSeconde = Math.round(vitesseMaxSession * IMAGES_PAR_SECONDE);
+    const gauche = canvas.width / 2 - 140;
+    ctx.font = "bold 16px Roboto, Arial, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillStyle = COULEUR_TEXTE;
+    ctx.fillText("Vitesse : " + pxParSeconde + " px/s", gauche, 20);
+    ctx.fillStyle = COULEUR_HALO;
+    ctx.fillText("Max : " + (maxPxParSeconde || "-"), gauche + 170, 20);
+}
+
+// niveau actuel, à gauche des vies
+function drawNiveau(){
     ctx.font = "bold 16px Roboto, Arial, sans-serif";
     ctx.fillStyle = COULEUR_TEXTE;
-    ctx.textAlign = "center";
-    ctx.fillText("Vitesse : " + pxParSeconde + " px/s", canvas.width / 2, 20);
+    ctx.textAlign = "right";
+    ctx.fillText("Niveau " + (niveau + 1) + " / " + NIVEAUX.length, canvas.width - 140, 20);
     ctx.textAlign = "left";
 }
 
@@ -264,6 +374,7 @@ function draw(){
     }
     drawScore();
     drawSpeed();
+    drawNiveau();
     drawLives();
     if(balleCollee){
         drawConsigne();
@@ -360,17 +471,16 @@ function collisionDetection(){
                     b.status -= 1;
                     //mise à jour du score
                     if(b.status < 1){
-                        score = score + 10;
+                        ajouterScore(10);
                         briquesRestantes--;
                         fixerVitesse(vitesse + PAS_ACCELERATION);
                     } else {
-                        score++;
+                        ajouterScore(1);
                     }
-                    //fin du jeu : plus aucune brique
+                    //niveau terminé : plus aucune brique (on sort, la grille vient de changer)
                     if(briquesRestantes === 0){
-                        alert("Bravo ! c'est gagné !");
-                        document.location.reload();
-                        clearInterval(interval);
+                        niveauTermine();
+                        return;
                     }
                 }
             } 
