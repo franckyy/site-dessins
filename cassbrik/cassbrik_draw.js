@@ -27,7 +27,26 @@ const paddleXoffset = 5;
 //   plateforme tout à gauche  -> 180° - ANGLE_EXTREME (160°)
 //   entre les deux            -> variation linéaire (milieu = 90°, tout droit)
 const ANGLE_EXTREME = 20;       // degrés
-const VITESSE_BALLE = 6.3;      // px par image (identique à la vitesse du début : racine de 2² + 6²)
+
+// ===== Vitesse de la balle =====
+// La balle part lentement, puis accélère à chaque brique détruite (jusqu'au plafond).
+// Les vitesses sont exprimées en px par image ; l'affichage les convertit en px/s.
+const PERIODE_MS = 10;                       // durée d'une image (même valeur que dans setInterval)
+const IMAGES_PAR_SECONDE = 1000 / PERIODE_MS;
+const VITESSE_DEPART = 3.5;                  // 350 px/s au lancement
+const VITESSE_MAX = 9;                       // 900 px/s : plafond pour rester jouable
+const PAS_ACCELERATION = 0.12;               // gain par brique détruite (plafond atteint vers la 46e brique sur 48)
+let vitesse = VITESSE_DEPART;
+
+// change la vitesse de la balle sans changer sa direction
+function fixerVitesse(v){
+    vitesse = Math.min(v, VITESSE_MAX);
+    const norme = Math.hypot(dx, dy);
+    if(norme > 0){
+        dx = dx / norme * vitesse;
+        dy = dy / norme * vitesse;
+    }
+}
 let balleCollee = true;
 let x = canvas.width / 2;
 let y = canvas.height - paddleHeight - ballRadius;
@@ -47,13 +66,14 @@ function lancerBalle(){
         return;
     }
     const angle = angleLancement();
-    dx = VITESSE_BALLE * Math.cos(angle);
-    dy = -VITESSE_BALLE * Math.sin(angle);
+    dx = vitesse * Math.cos(angle);
+    dy = -vitesse * Math.sin(angle);
     balleCollee = false;
 }
 
 function recollerBalle(){
     balleCollee = true;
+    vitesse = VITESSE_DEPART;   // après une vie perdue, on repart lentement
     dx = 0;
     dy = 0;
 }
@@ -74,7 +94,7 @@ const ANGLE_MIN_REBOND = 20;       // degrés
 const ANGLE_MAX_REBOND = 160;      // degrés
 
 function rebondSurPlateforme(){
-    const vitesse = Math.hypot(dx, dy);
+    const v = Math.hypot(dx, dy);
     // angle avec lequel la balle repart vers le haut (avant l'influence de la plateforme)
     let angle = Math.atan2(Math.abs(dy), dx) * 180 / Math.PI;
     // 0 = bord gauche de la plateforme, 1 = bord droit
@@ -82,8 +102,8 @@ function rebondSurPlateforme(){
     angle += INFLUENCE_PLATEFORME * (1 - 2 * t);
     angle = Math.min(ANGLE_MAX_REBOND, Math.max(ANGLE_MIN_REBOND, angle));
     const rad = angle * Math.PI / 180;
-    dx = vitesse * Math.cos(rad);
-    dy = -vitesse * Math.sin(rad);
+    dx = v * Math.cos(rad);
+    dy = -v * Math.sin(rad);
 }
 
 function drawConsigne(){
@@ -97,7 +117,7 @@ function drawConsigne(){
 let rightPressed = false;
 let leftPressed = false;
 
-var interval = setInterval(draw, 10);
+var interval = setInterval(draw, PERIODE_MS);
 
 //on peut mettre 16 briques de 50 px de large sur une ligne
 const brickRowCount = 3;
@@ -171,6 +191,16 @@ function drawScore(){
     ctx.fillText("Score : " + score, 20, 20);
 }
 
+// vitesse de la balle, en haut au centre de la zone de jeu
+function drawSpeed(){
+    const pxParSeconde = Math.round(vitesse * IMAGES_PAR_SECONDE);
+    ctx.font = "bold 16px Roboto, Arial, sans-serif";
+    ctx.fillStyle = COULEUR_TEXTE;
+    ctx.textAlign = "center";
+    ctx.fillText("Vitesse : " + pxParSeconde + " px/s", canvas.width / 2, 20);
+    ctx.textAlign = "left";
+}
+
 function drawBricks() {
     for(let c = 0; c < brickColumnCount; c++){
         for(let r = 0; r < brickRowCount; r++){
@@ -233,6 +263,7 @@ function draw(){
         collisionDetection();
     }
     drawScore();
+    drawSpeed();
     drawLives();
     if(balleCollee){
         drawConsigne();
@@ -331,6 +362,7 @@ function collisionDetection(){
                     if(b.status < 1){
                         score = score + 10;
                         briquesRestantes--;
+                        fixerVitesse(vitesse + PAS_ACCELERATION);
                     } else {
                         score++;
                     }
