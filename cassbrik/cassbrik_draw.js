@@ -108,12 +108,38 @@ function rebondSurPlateforme(){
     dy = -v * Math.sin(rad);
 }
 
+// ===== Téléphone : affichage réduit et commandes tactiles =====
+const ECRAN_TACTILE = window.matchMedia("(pointer: coarse)").matches;
+// téléphone tenu en hauteur : un message cache le jeu (classes écrites sur <html> par cassbrik.php),
+// la partie est en pause, sauf si le joueur a touché « Jouer quand même »
+const RACINE = document.documentElement;
+function enPause(){
+    return RACINE.classList.contains("tel-portrait") && !RACINE.classList.contains("jeu-force");
+}
+const LARGEUR_ECRAN_REDUIT = 640;   // largeur du jeu à l'écran (px CSS) en dessous de laquelle l'affichage est réduit
+const DECALAGE_REDUIT = 30;         // briques descendues de 30 px (pour laisser la place au tableau de bord agrandi)
+const SENSIBILITE_TACTILE = 1.3;    // 1 = la plateforme suit exactement le doigt ; plus grand = elle va plus vite
+let affichageReduit = false;        // recalculé à chaque image
+let toucheX = null;                 // position du doigt (null = aucun doigt posé)
+let toucheDebut = 0;
+let toucheDeplacement = 0;
+let dernierToucher = 0;
+
 function drawConsigne(){
-    ctx.font = "bold 20px Roboto, Arial, sans-serif";
+    const taille = affichageReduit ? 36 : 20;
+    const lignes = ["Niveau " + (niveau + 1)];
+    if(ECRAN_TACTILE){
+        lignes.push("Glisse le doigt pour bouger");
+        lignes.push("Touche l'écran pour lancer la balle");
+    } else {
+        lignes.push("Appuie sur ESPACE pour lancer la balle");
+    }
+    ctx.font = "bold " + taille + "px Roboto, Arial, sans-serif";
     ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
     ctx.textAlign = "center";
-    ctx.fillText("Niveau " + (niveau + 1), canvas.width / 2, canvas.height * 0.55);
-    ctx.fillText("Appuie sur ESPACE pour lancer la balle", canvas.width / 2, canvas.height * 0.62);
+    for(let i = 0; i < lignes.length; i++){
+        ctx.fillText(lignes[i], canvas.width / 2, canvas.height * 0.55 + i * (affichageReduit ? 54 : 45));
+    }
     ctx.textAlign = "left";
 }
 
@@ -254,6 +280,24 @@ function rectArrondi(rx, ry, w, h, r){
 }
 
 function drawLives(){
+    if(affichageReduit){
+        for(let i = 0; i < viesMax; i++){
+            const cx = canvas.width - 24 - (viesMax - 1 - i) * 34;
+            ctx.beginPath();
+            ctx.arc(cx, 24, 11, 0, Math.PI * 2);
+            ctx.lineWidth = 3;
+            if(i < lives){
+                ctx.fillStyle = "#46EB35";
+                ctx.fill();
+                ctx.strokeStyle = "#95F68B";
+            } else {
+                ctx.strokeStyle = "rgba(255,255,255,0.35)";
+            }
+            ctx.stroke();
+            ctx.closePath();
+        }
+        return;
+    }
     const espace = 22;
     const cy = 15;
     ctx.font = "bold 16px Roboto, Arial, sans-serif";
@@ -280,6 +324,13 @@ function drawLives(){
 }
 
 function drawScore(){
+    if(affichageReduit){
+        ctx.font = "bold 32px Roboto, Arial, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillStyle = COULEUR_TEXTE;
+        ctx.fillText("Score : " + score, 20, 38);
+        return;
+    }
     ctx.font = "bold 16px Roboto, Arial, sans-serif";
     ctx.textAlign = "left";
     ctx.fillStyle = COULEUR_TEXTE;
@@ -291,6 +342,9 @@ function drawScore(){
 
 // vitesse de la balle (en px/s) et vitesse maximale de la session, en haut au centre
 function drawSpeed(){
+    if(affichageReduit){
+        return;   // vitesse et vitesse maximale : seulement sur un grand écran
+    }
     const pxParSeconde = Math.round(vitesse * IMAGES_PAR_SECONDE);
     const maxPxParSeconde = Math.round(vitesseMaxSession * IMAGES_PAR_SECONDE);
     const gauche = canvas.width / 2 - 140;
@@ -304,6 +358,14 @@ function drawSpeed(){
 
 // niveau actuel, à gauche des vies
 function drawNiveau(){
+    if(affichageReduit){
+        ctx.font = "bold 32px Roboto, Arial, sans-serif";
+        ctx.fillStyle = COULEUR_TEXTE;
+        ctx.textAlign = "center";
+        ctx.fillText("Niveau " + (niveau + 1) + " / " + NIVEAUX.length, canvas.width / 2, 38);
+        ctx.textAlign = "left";
+        return;
+    }
     ctx.font = "bold 16px Roboto, Arial, sans-serif";
     ctx.fillStyle = COULEUR_TEXTE;
     ctx.textAlign = "right";
@@ -317,7 +379,7 @@ function drawBricks() {
             const b = bricks[c][r];
             // la position est toujours calculée : la détection des collisions s'en sert
             b.x = c * (brickWidth + brickPadding) + brickOffsetLeft;
-            b.y = r * (brickHeight + brickPadding) + brickOffsetTop;
+            b.y = r * (brickHeight + brickPadding) + brickOffsetTop + (affichageReduit ? DECALAGE_REDUIT : 0);
             if(b.status >= 1){
                 const couleur = COULEURS_BRIQUES[Math.min(b.status, 3)];
                 const degrade = ctx.createLinearGradient(0, b.y, 0, b.y + brickHeight);
@@ -337,7 +399,7 @@ function drawBricks() {
 
 function drawBall(){
     ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+    ctx.arc(x, y, affichageReduit ? ballRadius * 1.5 : ballRadius, 0, Math.PI * 2);   // dessin plus gros en affichage réduit, la collision ne change pas
     ctx.shadowColor = COULEUR_HALO;
     ctx.shadowBlur = 14;
     ctx.fillStyle = COULEUR_BALLE;
@@ -362,6 +424,10 @@ function drawPaddle(){
 }
 
 function draw(){
+    if(enPause()){
+        return;   // message « tourne ton téléphone » affiché : partie en pause
+    }
+    affichageReduit = canvas.getBoundingClientRect().width < LARGEUR_ECRAN_REDUIT;
     if(balleCollee){
         positionnerBalleCollee();
     }
@@ -448,6 +514,9 @@ function keyUpHandler(e){
 }
 
 function mouseMoveHandler(e){
+    if(Date.now() - dernierToucher < 1000){
+        return;   // le téléphone simule une souris après un toucher : on l'ignore
+    }
     // position de la souris dans le canvas (tient compte d'un éventuel redimensionnement CSS)
     const rect = canvas.getBoundingClientRect();
     const relativeX = (e.clientX - rect.left) * canvas.width / rect.width;
@@ -487,3 +556,62 @@ function collisionDetection(){
         }
     }
 }
+
+// ===== Commandes tactiles =====
+// Glisser le doigt n'importe où : la plateforme suit le mouvement (déplacement relatif : le doigt ne cache pas la plateforme).
+// Toucher bref sans glisser : lance la balle quand elle est collée à la plateforme.
+function toucheSurCommande(e){
+    return e.target.closest && e.target.closest("a, button");
+}
+
+document.addEventListener("touchstart", function(e){
+    dernierToucher = Date.now();
+    if(toucheSurCommande(e) || e.touches.length !== 1){
+        return;
+    }
+    toucheX = e.touches[0].clientX;
+    toucheDebut = Date.now();
+    toucheDeplacement = 0;
+    e.preventDefault();
+}, {passive: false});
+
+document.addEventListener("touchmove", function(e){
+    dernierToucher = Date.now();
+    if(toucheX === null || e.touches.length < 1){
+        return;
+    }
+    const nouveauX = e.touches[0].clientX;
+    const delta = nouveauX - toucheX;
+    toucheX = nouveauX;
+    toucheDeplacement += Math.abs(delta);
+    const rect = canvas.getBoundingClientRect();
+    paddleX += delta * (canvas.width / rect.width) * SENSIBILITE_TACTILE;
+    if(paddleX < 0){
+        paddleX = 0;
+    } else if(paddleX + paddleWidth > canvas.width){
+        paddleX = canvas.width - paddleWidth;
+    }
+    e.preventDefault();
+}, {passive: false});
+
+document.addEventListener("touchend", function(){
+    dernierToucher = Date.now();
+    if(toucheX === null){
+        return;
+    }
+    const bref = (Date.now() - toucheDebut) < 300 && toucheDeplacement < 10;
+    toucheX = null;
+    if(bref){
+        lancerBalle();
+    }
+}, false);
+
+document.addEventListener("touchcancel", function(){
+    toucheX = null;
+}, false);
+
+// Bouton « Start game » : lance la balle (comme la touche ESPACE)
+document.getElementById("runButton").addEventListener("click", function(){
+    lancerBalle();
+    this.blur();   // évite qu'un appui sur ESPACE ne « clique » encore le bouton
+}, false);

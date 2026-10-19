@@ -14,7 +14,7 @@ if (!is_array($json_data)) {
 <body>
 <?php require 'header.php';?>
 
-<div class="grid-wrapper">
+<div class="grid-wrapper grid-jeux">
     <?php if (!empty($erreurJson)): ?>
         <p>Les jeux sont momentanément indisponibles.</p>
     <?php endif; ?>

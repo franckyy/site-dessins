@@ -77,3 +77,23 @@ body {
     background-color: black;
     transition: 0.5s;
 }
+/* Page Jeux : icônes carrées entièrement visibles, bouton JOUER sous l'image */
+.grid-wrapper.grid-jeux {
+    grid-auto-rows: auto;
+}
+.grid-wrapper.grid-jeux > div {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.grid-wrapper.grid-jeux > div > img {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+}
+.grid-wrapper.grid-jeux .btnDownload {
+    position: static;
+    transform: none;
+    align-self: center;
+    margin: 8px 0;
+}
