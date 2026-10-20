@@ -90,6 +90,46 @@
     }
 
     // ----- Lecture à voix haute (facultative) -----
+    // Le navigateur prend sinon la voix par défaut de l'appareil (souvent robotique sur
+    // ordinateur, eSpeak sous Linux) : on choisit la meilleure voix disponible pour la langue.
+    const LANGUES_VOIX = {
+        fr: ['fr-fr', 'fr-ca', 'fr-be', 'fr-ch', 'fr'],
+        en: ['en-gb', 'en-us', 'en-au', 'en']
+    };
+    const VOIX_BONNES = /natural|neural|online|google|premium|enhanced|siri|hq/i;
+    const VOIX_MAUVAISES = /espeak|festival|flite|mbrola/i;
+    let voixAppareil = [];
+
+    function chargerVoix() {
+        try { voixAppareil = window.speechSynthesis.getVoices(); } catch (e) { voixAppareil = []; }
+    }
+    if (voixOk) {
+        chargerVoix();
+        // la liste des voix arrive souvent après le chargement de la page
+        window.speechSynthesis.addEventListener('voiceschanged', chargerVoix);
+    }
+
+    function meilleureVoix(langue) {
+        const prefs = LANGUES_VOIX[langue];
+        let meilleure = null;
+        let meilleureNote = -1;
+        voixAppareil.forEach(function (v) {
+            const rang = prefs.indexOf(v.lang.toLowerCase().replace('_', '-'));
+            if (rang === -1) {
+                return; // autre langue : écartée
+            }
+            let note = 100 - rang * 10;
+            if (VOIX_BONNES.test(v.name)) { note += 50; }
+            if (VOIX_MAUVAISES.test(v.name)) { note -= 80; }
+            if (!v.localService) { note += 5; }
+            if (note > meilleureNote) {
+                meilleureNote = note;
+                meilleure = v;
+            }
+        });
+        return meilleure;
+    }
+
     function parler(texte, langue) {
         if (!voixOk || !optVoix.checked) {
             return;
@@ -99,6 +139,10 @@
             const lecture = new SpeechSynthesisUtterance(texte);
             lecture.lang = langue === 'en' ? 'en-GB' : 'fr-FR';
             lecture.rate = 0.9;
+            const voix = meilleureVoix(langue === 'en' ? 'en' : 'fr');
+            if (voix) {
+                lecture.voice = voix;
+            }
             window.speechSynthesis.speak(lecture);
         } catch (e) { /* pas de voix disponible : tant pis */ }
     }
