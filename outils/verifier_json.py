@@ -145,10 +145,45 @@ def verifier_jeux():
             err(src, f"page du jeu introuvable : {fichier}")
 
 
+def verifier_vocabulaire():
+    src = "vocabulaire.json"
+    vus_en, vus_fr = {}, {}
+    entrees = charger(src, ["en", "fr", "theme"])
+    for it in entrees:
+        en, fr = it["en"], it["fr"]
+        # article et genre du mot français (facultatifs : couleurs, nombres, adjectifs n'en ont pas)
+        art, genre = it.get("art", ""), it.get("genre", "")
+        if art not in ("", "le", "la", "les", "l'"):
+            err(src, f"« {fr} » : article « {art} » inconnu (le, la, les, l' ou vide)")
+        if genre not in ("", "m", "f"):
+            err(src, f"« {fr} » : genre « {genre} » inconnu (m, f ou vide)")
+        if art and not genre:
+            err(src, f"« {fr} » : article « {art} » sans genre (m ou f)")
+        if genre and not art:
+            err(src, f"« {fr} » : genre « {genre} » sans article")
+        if (art, genre) in (("le", "f"), ("la", "m")):
+            err(src, f"« {fr} » : l'article « {art} » ne va pas avec le genre « {genre} »")
+        for champ, valeur in (("en", en), ("fr", fr), ("theme", it["theme"])):
+            if valeur != valeur.strip():
+                err(src, f"« {valeur} » ({champ}) : espace en début ou en fin de texte")
+        if en.strip().lower() == fr.strip().lower():
+            warn(src, f"« {en} » : mot identique en anglais et en français (cartes indiscernables)")
+        # deux paires avec le même mot rendraient le jeu ambigu (deux bonnes réponses possibles)
+        if en.lower() in vus_en:
+            err(src, f"« {en} » (en) apparaît plusieurs fois")
+        if fr.lower() in vus_fr:
+            err(src, f"« {fr} » (fr) apparaît plusieurs fois")
+        vus_en[en.lower()] = True
+        vus_fr[fr.lower()] = True
+    if 0 < len(entrees) < 12:
+        warn(src, "moins de 12 mots : le jeu Mémory bilingue sera indisponible")
+
+
 def main():
     verifier_coloriages()
     verifier_labyrinthes()
     verifier_jeux()
+    verifier_vocabulaire()
 
     for ligne in erreurs:
         print(f"ERREUR         {ligne}")

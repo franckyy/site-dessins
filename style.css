@@ -1,4 +1,4 @@
-@import url('./roboto/fonts.css');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 /* declaration des variables en fonction de la couleur */
 :root {
     --colorBackInput: rgb(133, 236, 228);
@@ -77,23 +77,33 @@ body {
     background-color: black;
     transition: 0.5s;
 }
-/* Page Jeux : icônes carrées entièrement visibles, bouton JOUER sous l'image */
+
+/* Page Jeux : icônes carrées entièrement visibles, l'icône est le lien */
 .grid-wrapper.grid-jeux {
     grid-auto-rows: auto;
 }
 .grid-wrapper.grid-jeux > div {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
+    overflow: hidden;
 }
-.grid-wrapper.grid-jeux > div > img {
+.grid-wrapper.grid-jeux > div > img,
+.grid-wrapper.grid-jeux > div > a > img {
+    display: block;
+    width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: contain;
+    border-radius: 10px;
 }
-.grid-wrapper.grid-jeux .btnDownload {
-    position: static;
-    transform: none;
-    align-self: center;
-    margin: 8px 0;
+.grid-wrapper.grid-jeux > div > a {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+.lienJeu img {
+    transition: transform 0.3s, filter 0.3s;
+}
+.lienJeu:hover img,
+.lienJeu:focus-visible img {
+    transform: scale(1.04);
+    filter: brightness(1.08);
 }

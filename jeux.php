@@ -13,6 +13,7 @@ if (!is_array($json_data)) {
 ?>
 <body>
 <?php require 'header.php';?>
+<h3>Jeux</h3>
 
 <div class="grid-wrapper grid-jeux">
     <?php if (!empty($erreurJson)): ?>
@@ -20,12 +21,24 @@ if (!is_array($json_data)) {
     <?php endif; ?>
 
     <?php foreach ($json_data as $icon): ?>
+        <?php
+            $nom     = $icon['nom'];
+            $file    = $icon['file'] ?? '';
+            $libelle = str_replace('_', ' ', $nom);
+            $src     = $dir . $nom . '.jpg';
+        ?>
         <div>
-            <img class="dessin" loading="lazy"
-                 src="<?= htmlspecialchars($dir . $icon['nom'] . '.jpg') ?>"
-                 alt="icône du jeu : <?= htmlspecialchars($icon['nom']) ?>">
-            <?php if (!empty($icon['file'])): ?>
-                <a class="btnDownload" href="<?= htmlspecialchars($icon['file']) ?>">JOUER</a>
+            <?php if ($file !== ''): ?>
+                <a class="lienJeu" href="<?= htmlspecialchars($file) ?>"
+                   aria-label="Jouer : <?= htmlspecialchars($libelle) ?>">
+                    <img class="dessin" loading="lazy"
+                         src="<?= htmlspecialchars($src) ?>"
+                         alt="icône du jeu : <?= htmlspecialchars($libelle) ?>">
+                </a>
+            <?php else: ?>
+                <img class="dessin" loading="lazy"
+                     src="<?= htmlspecialchars($src) ?>"
+                     alt="<?= htmlspecialchars($libelle) ?>">
             <?php endif; ?>
         </div>
     <?php endforeach; ?>

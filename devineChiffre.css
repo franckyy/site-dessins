@@ -69,9 +69,19 @@
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 #chiffreUser::placeholder {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     font-weight: 400;
     color: var(--bl2);
+}
+/* Supprime les flèches +/- du champ numérique */
+#chiffreUser {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+#chiffreUser::-webkit-outer-spin-button,
+#chiffreUser::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 #chiffreUser:focus {
     border-color: var(--vt4);
