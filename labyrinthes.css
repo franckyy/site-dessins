@@ -1,22 +1,22 @@
 .laby-actions {
     position: absolute;
-    bottom: 10px;
+    bottom: 4px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 8px;
+    gap: 6px;
     white-space: nowrap;
 }
 .btnLaby {
     background-color: #555;
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     letter-spacing: normal;
     text-transform: none;
     text-decoration: none;
     text-shadow: none;
-    padding: 10px 14px;
+    padding: 6px 10px;
     border-radius: 5px;
     opacity: 0.8;
 }

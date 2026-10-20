@@ -107,3 +107,29 @@ body {
     transform: scale(1.04);
     filter: brightness(1.08);
 }
+
+/* Page Labyrinthes : le cadre vert épouse la miniature (600 x 424), boutons posés sur l'image */
+.grid-wrapper.grid-laby {
+    grid-auto-rows: auto;
+    align-items: start;
+}
+.grid-wrapper.grid-laby > div {
+    overflow: hidden;
+}
+.grid-wrapper.grid-laby > div > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 600 / 424;
+    object-fit: contain;
+    border-radius: 4px;
+}
+/* très petits écrans : une seule colonne, boutons côte à côte */
+@media screen and (max-width: 380px) {
+    .grid-wrapper.grid-laby {
+        grid-template-columns: 1fr;
+    }
+    .grid-wrapper.grid-laby .laby-actions {
+        flex-direction: row;
+    }
+}
